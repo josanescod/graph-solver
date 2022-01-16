@@ -1,0 +1,32 @@
+p {
+  text-align: center;
+}
+input {
+  width: 20px;
+}
+
+button {
+  margin-top: 5px;
+}
+.nobr {
+  display: inline;
+}
+
+#size {
+  text-align: center;
+}
+
+.wrapper {
+  text-align: center;
+}
+
+.empty,
+.result {
+  /*  border: 1px solid black;*/
+  margin: 0 auto;
+}
+
+.error {
+  font-size: 14px;
+  color: red;
+}
