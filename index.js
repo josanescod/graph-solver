@@ -7,10 +7,11 @@ window.onload = () => {
 function main() {
   const sizeButton = document.querySelector("#sizeButton");
   sizeButton.addEventListener("click", function () {
-    const matrixSize = document.querySelector("#matrixSize").value;
-    if (matrixSize > 1 && matrixSize <= 10 && matrixSize.length > 0) {
+    let matrixSize = document.querySelector("#matrixSize");
+    matrixSize = matrixSize.value;
+    if (matrixSize > 1 && matrixSize <= 15 && matrixSize.length > 0) {
       deletingTemporalTable();
-      createMatrix(parseInt(matrixSize));
+      createMatrix(matrixSize);
     } else {
       printError();
     }
@@ -28,16 +29,38 @@ function main() {
     } else {
       const result = document.querySelector(".result");
       if (result === null) {
-        const matrixArray = readTable(parseInt(matrixSize.value));
+        let size = parseInt(matrixSize.value);
+        const matrixArray = readTable(size);
         console.log(matrixArray);
-        createMatrix(parseInt(matrixSize.value), matrixArray);
+
+        createMatrix(size, matrixArray);
+        //floyd
+        let arrayFLoyd = floyd(matrixArray);
+        console.log(arrayFLoyd);
+        createMatrix(size, arrayFLoyd);
       }
     }
   });
 }
 
 function createMatrix(size, arr = []) {
-  const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+  const letters = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+  ];
   //create table
   const table = document.createElement("table");
   if (arr.length !== 0) {
@@ -63,7 +86,11 @@ function createMatrix(size, arr = []) {
       let td = document.createElement("td");
       let input = document.createElement("input");
       if (arr.length !== 0) {
-        input.value = arr[i][j];
+        if (arr[i][j] === Infinity) {
+          input.value = "∞";
+        } else {
+          input.value = arr[i][j];
+        }
       }
       td.appendChild(input);
       tr.appendChild(td);
@@ -90,7 +117,11 @@ function readTable(size) {
   let newArr = [];
   const input = document.querySelectorAll("input");
   for (let i = 1; i < input.length; i++) {
-    arrayInputs.push(input[i].value);
+    if (input[i].value === "-" || input[i].value === "") {
+      arrayInputs.push(Infinity);
+    } else {
+      arrayInputs.push(parseInt(input[i].value));
+    }
   }
   for (let i = 0; i < arrayInputs.length; i += size) {
     newArr.push(arrayInputs.slice(i, i + size));
@@ -124,4 +155,24 @@ function deletingTemporalTable() {
     const pResult = document.querySelector(".wrapper2 p");
     pResult.remove();
   }
+}
+
+//floyd   https://www.geeksforgeeks.org/floyd-warshall-algorithm-dp-16/
+function floyd(arr) {
+  console.time("floyd");
+  let finalArray = arr;
+  console.log(finalArray);
+  for (let k = 0; k < arr.length; k++) {
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = 0; j < arr.length; j++) {
+        if (arr[i][k] + arr[k][j] < arr[i][j]) {
+          console.log("changing values...");
+          finalArray[i][j] = arr[i][k] + arr[k][j];
+        }
+      }
+    }
+  }
+
+  console.timeEnd("floyd");
+  return finalArray;
 }
