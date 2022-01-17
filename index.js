@@ -160,19 +160,51 @@ function deletingTemporalTable() {
 //floyd   https://www.geeksforgeeks.org/floyd-warshall-algorithm-dp-16/
 function floyd(arr) {
   console.time("floyd");
-  let finalArray = arr;
+  //let finalArray = [...arr]; // don't work
+  const clone = (items) =>
+    items.map((item) => (Array.isArray(item) ? clone(item) : item)); //deep clone
+  let finalArray = clone(arr);
+  for (let i = 0; i < finalArray.length; i++) {
+    for (let j = 0; j < finalArray.length; j++) {
+      finalArray[i][j] = "0";
+    }
+  }
   console.log(finalArray);
+  console.log(arr);
+  let count = 0;
+  //let numberOfOperations = arr.length * arr.length * arr.length;
+  let numberOfOperations = 0;
   for (let k = 0; k < arr.length; k++) {
+    console.log(`------------- matrix nº ${k} -------------`);
     for (let i = 0; i < arr.length; i++) {
       for (let j = 0; j < arr.length; j++) {
+        count++;
+        console.log(`
+        k:${k},
+        i:${i},
+        j:${j},
+        arr[i][k]: ${arr[i][k]}, 
+        arr[k][j]: ${arr[k][j]}, 
+        arr[i][j]: ${arr[i][j]}
+        `);
+
         if (arr[i][k] + arr[k][j] < arr[i][j]) {
-          console.log("changing values...");
+          console.log(
+            `changing values... in matrix: ${k},
+            ${arr[i][j]} > ${arr[i][k]} + ${arr[k][j]}`
+          );
           finalArray[i][j] = arr[i][k] + arr[k][j];
+        }
+        numberOfOperations++;
+        console.log(`number of operations: ${numberOfOperations}`);
+        if (numberOfOperations === arr.length * arr.length) {
+          console.log("MATRICES???================> ", finalArray);
+          numberOfOperations = 0;
         }
       }
     }
   }
-
+  console.log(`number of iterations: ${count}`);
   console.timeEnd("floyd");
   return finalArray;
 }
