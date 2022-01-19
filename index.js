@@ -169,13 +169,18 @@ function floyd(arr) {
       finalArray[i][j] = "0";
     }
   }
+
+  // new array
+  let arrayTemp = [];
   console.log(finalArray);
   console.log(arr);
   let count = 0;
   //let numberOfOperations = arr.length * arr.length * arr.length;
   let numberOfOperations = 0;
+  let valuesInMatrix = 0;
   for (let k = 0; k < arr.length; k++) {
     console.log(`------------- matrix nº ${k} -------------`);
+    arrayTemp = [[]];
     for (let i = 0; i < arr.length; i++) {
       for (let j = 0; j < arr.length; j++) {
         count++;
@@ -193,13 +198,28 @@ function floyd(arr) {
             `changing values... in matrix: ${k},
             ${arr[i][j]} > ${arr[i][k]} + ${arr[k][j]}`
           );
-          finalArray[i][j] = arr[i][k] + arr[k][j];
+          finalArray[i][j] = arr[i][k] + arr[k][j]; // push every operation in temp array
+          //arrayTemp[k].push(arr[i][k] + arr[k][j]);
+          console.log("push en tempOPS");
+        } else {
+          //arrayTemp[k].push(arr[i][j]);
+          console.log("push en tempOPS");
         }
         numberOfOperations++;
-        console.log(`number of operations: ${numberOfOperations}`);
-        if (numberOfOperations === arr.length * arr.length) {
-          console.log("MATRICES???================> ", finalArray);
+        valuesInMatrix++;
+        console.log(
+          `number of operations: ${numberOfOperations} and number of values in Matrix: ${valuesInMatrix}`
+        );
+        if (numberOfOperations === arr.length) {
+          console.log("push en tempMATRIX y vaciar tempOPS");
           numberOfOperations = 0;
+          //arrayTemp = [];
+        }
+        if (valuesInMatrix === arr.length * arr.length) {
+          // very n*n operations create new subarray and delete temp array?
+          console.log("MATRICES???================> ", arrayTemp);
+          console.log("IMPRIMIR MATRIZ i vaciar tempMATRIX");
+          valuesInMatrix = 0;
         }
       }
     }
