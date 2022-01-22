@@ -158,6 +158,7 @@ function deletingTemporalTable() {
 }
 
 //floyd   https://www.geeksforgeeks.org/floyd-warshall-algorithm-dp-16/
+// review the algorithm does not give the correct result
 function floyd(arr) {
   console.time("floyd");
   //let finalArray = [...arr]; // don't work
