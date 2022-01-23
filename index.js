@@ -161,15 +161,7 @@ function deletingTemporalTable() {
 // review the algorithm does not give the correct result
 function floyd(arr) {
   console.time("floyd");
-  //let finalArray = [...arr]; // don't work
-  const clone = (items) =>
-    items.map((item) => (Array.isArray(item) ? clone(item) : item)); //deep clone
-  let finalArray = clone(arr);
-  for (let i = 0; i < finalArray.length; i++) {
-    for (let j = 0; j < finalArray.length; j++) {
-      finalArray[i][j] = "0";
-    }
-  }
+  let finalArray = [...arr]; // don't work
 
   // new array
   let arrayTemp = [];
