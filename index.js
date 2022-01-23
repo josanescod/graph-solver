@@ -31,11 +31,11 @@ function main() {
       if (result === null) {
         let size = parseInt(matrixSize.value);
         const matrixArray = readTable(size);
-        createMatrix(size, matrixArray);
+        // createMatrix(size, matrixArray);
         //floyd
-        let arrayFLoyd = floyd(matrixArray);
+        floyd(matrixArray);
         //console.log(arrayFLoyd);
-        createMatrix(size, arrayFLoyd);
+        //createMatrix(size, arrayFLoyd);
       }
     }
   });
@@ -102,10 +102,10 @@ function createMatrix(size, arr = []) {
   if (table.className === "empty") {
     wrapper.appendChild(table);
   } else if (table.className === "result") {
-    const presult = document.createElement("p");
-    presult.innerHTML = "PRINT RESULT";
+    /*const presult = document.createElement("p");
+    presult.innerHTML = "PRINT RESULT";*/
     const wrapper2 = document.querySelector(".wrapper2");
-    wrapper2.appendChild(presult);
+    //wrapper2.appendChild(presult);
     wrapper2.appendChild(table);
   }
 }
@@ -185,6 +185,7 @@ function floyd(arr) {
         }
         if (valuesInMatrix === arr.length * arr.length) {
           console.log(tempMatrix); // print tempMatrix in DOM
+          createMatrix(arr.length, tempMatrix);
           tempMatrix = [];
           valuesInMatrix = 0;
         }
