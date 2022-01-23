@@ -31,12 +31,10 @@ function main() {
       if (result === null) {
         let size = parseInt(matrixSize.value);
         const matrixArray = readTable(size);
-        console.log(matrixArray);
-
         createMatrix(size, matrixArray);
         //floyd
         let arrayFLoyd = floyd(matrixArray);
-        console.log(arrayFLoyd);
+        //console.log(arrayFLoyd);
         createMatrix(size, arrayFLoyd);
       }
     }
@@ -160,58 +158,34 @@ function deletingTemporalTable() {
 //floyd   https://www.geeksforgeeks.org/floyd-warshall-algorithm-dp-16/
 // review the algorithm does not give the correct result
 function floyd(arr) {
-  console.time("floyd");
   let finalArray = [...arr]; // don't work
-
-  // new array
-  let arrayTemp = [];
-  console.log(finalArray);
-  console.log(arr);
   let count = 0;
-  //let numberOfOperations = arr.length * arr.length * arr.length;
+  console.time("floyd");
   let numberOfOperations = 0;
   let valuesInMatrix = 0;
   for (let k = 0; k < arr.length; k++) {
     console.log(`------------- matrix nº ${k} -------------`);
-    arrayTemp = [[]];
+    let tempOPS = [];
+    let tempMatrix = [];
     for (let i = 0; i < arr.length; i++) {
       for (let j = 0; j < arr.length; j++) {
         count++;
-        console.log(`
-        k:${k},
-        i:${i},
-        j:${j},
-        arr[i][k]: ${arr[i][k]}, 
-        arr[k][j]: ${arr[k][j]}, 
-        arr[i][j]: ${arr[i][j]}
-        `);
-
         if (arr[i][k] + arr[k][j] < arr[i][j]) {
-          console.log(
-            `changing values... in matrix: ${k},
-            ${arr[i][j]} > ${arr[i][k]} + ${arr[k][j]}`
-          );
           finalArray[i][j] = arr[i][k] + arr[k][j]; // push every operation in temp array
-          //arrayTemp[k].push(arr[i][k] + arr[k][j]);
-          console.log("push en tempOPS");
+          tempOPS.push(arr[i][k] + arr[k][j]);
         } else {
-          //arrayTemp[k].push(arr[i][j]);
-          console.log("push en tempOPS");
+          tempOPS.push(arr[i][j]);
         }
         numberOfOperations++;
         valuesInMatrix++;
-        console.log(
-          `number of operations: ${numberOfOperations} and number of values in Matrix: ${valuesInMatrix}`
-        );
         if (numberOfOperations === arr.length) {
-          console.log("push en tempMATRIX y vaciar tempOPS");
+          tempMatrix.push(tempOPS);
+          tempOPS = [];
           numberOfOperations = 0;
-          //arrayTemp = [];
         }
         if (valuesInMatrix === arr.length * arr.length) {
-          // very n*n operations create new subarray and delete temp array?
-          console.log("MATRICES???================> ", arrayTemp);
-          console.log("IMPRIMIR MATRIZ i vaciar tempMATRIX");
+          console.log(tempMatrix); // print tempMatrix in DOM
+          tempMatrix = [];
           valuesInMatrix = 0;
         }
       }
