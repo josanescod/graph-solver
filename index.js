@@ -20,7 +20,7 @@ function main() {
   clearButton.addEventListener("click", function () {
     deletingTemporalTable();
   });
-  const readButton = document.querySelector("#readButton");
+  const readButton = document.querySelector("#floyd");
   readButton.addEventListener("click", function () {
     const table = document.querySelector("table");
     const error = document.querySelector(".error");
@@ -31,11 +31,7 @@ function main() {
       if (result === null) {
         let size = parseInt(matrixSize.value);
         const matrixArray = readTable(size);
-        // createMatrix(size, matrixArray);
-        //floyd
         floyd(matrixArray);
-        //console.log(arrayFLoyd);
-        //createMatrix(size, arrayFLoyd);
       }
     }
   });
@@ -102,10 +98,7 @@ function createMatrix(size, arr = []) {
   if (table.className === "empty") {
     wrapper.appendChild(table);
   } else if (table.className === "result") {
-    /*const presult = document.createElement("p");
-    presult.innerHTML = "PRINT RESULT";*/
     const wrapper2 = document.querySelector(".wrapper2");
-    //wrapper2.appendChild(presult);
     wrapper2.appendChild(table);
   }
 }
@@ -147,18 +140,17 @@ function deletingTemporalTable() {
   if (table !== null) {
     table.remove();
   }
-  const tableResult = document.querySelector(".result");
-  if (tableResult !== null) {
-    tableResult.remove();
-    const pResult = document.querySelector(".wrapper2 p");
-    pResult.remove();
+  const tablesResult = document.querySelectorAll(".result");
+  if (tablesResult !== null) {
+    tablesResult.forEach((table) => {
+      table.remove();
+    });
   }
 }
 
-//floyd   https://www.geeksforgeeks.org/floyd-warshall-algorithm-dp-16/
-// review the algorithm does not give the correct result
+//floyd https://www.geeksforgeeks.org/floyd-warshall-algorithm-dp-16/
 function floyd(arr) {
-  let finalArray = [...arr]; // don't work
+  let finalArray = [...arr];
   let count = 0;
   console.time("floyd");
   let numberOfOperations = 0;
@@ -171,7 +163,7 @@ function floyd(arr) {
       for (let j = 0; j < arr.length; j++) {
         count++;
         if (arr[i][k] + arr[k][j] < arr[i][j]) {
-          finalArray[i][j] = arr[i][k] + arr[k][j]; // push every operation in temp array
+          finalArray[i][j] = arr[i][k] + arr[k][j]; // if you remove this line it doesn't work
           tempOPS.push(arr[i][k] + arr[k][j]);
         } else {
           tempOPS.push(arr[i][j]);
@@ -184,8 +176,8 @@ function floyd(arr) {
           numberOfOperations = 0;
         }
         if (valuesInMatrix === arr.length * arr.length) {
-          console.log(tempMatrix); // print tempMatrix in DOM
-          createMatrix(arr.length, tempMatrix);
+          console.log(tempMatrix);
+          createMatrix(arr.length, tempMatrix); // print tempMatrix in DOM
           tempMatrix = [];
           valuesInMatrix = 0;
         }
@@ -194,5 +186,4 @@ function floyd(arr) {
   }
   console.log(`number of iterations: ${count}`);
   console.timeEnd("floyd");
-  return finalArray;
 }
