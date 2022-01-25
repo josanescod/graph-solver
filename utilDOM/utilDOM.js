@@ -98,6 +98,10 @@ function deletingTemporalTable() {
       table.remove();
     });
   }
+  const dijsktraButton = document.querySelector(".dijkstra");
+  if (dijsktraButton !== null) {
+    dijsktraButton.remove();
+  }
 }
 
 export { createMatrix, readTable, deletingTemporalTable };
