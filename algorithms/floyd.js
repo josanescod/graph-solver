@@ -3,9 +3,9 @@ import { createMatrix as createMatrix } from "../utilDOM/utilDOM.js";
 
 //floyd https://www.geeksforgeeks.org/floyd-warshall-algorithm-dp-16/
 function floyd(arr) {
+  console.time("floyd");
   let finalArray = [...arr];
   let count = 0;
-  console.time("floyd");
   let numberOfOperations = 0;
   let valuesInMatrix = 0;
   for (let k = 0; k < arr.length; k++) {

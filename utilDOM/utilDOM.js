@@ -33,7 +33,7 @@ function createMatrix(size, arr = []) {
     th.innerHTML = letters[i];
     let tv = document.createElement("th");
     tv.innerHTML = letters[i];
-    vertexs.appendChild(tv);
+    //vertexs.appendChild(tv);
 
     let tr = document.createElement("tr");
     tr.appendChild(th);
