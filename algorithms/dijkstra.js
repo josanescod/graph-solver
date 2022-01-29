@@ -112,6 +112,7 @@ function createTableDijkstra(arr) {
   trTableResult.insertBefore(newTh, trTableResult.firstChild);
 }
 
+//dijkstra https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/
 function dijkstra(arr, src) {
   let distTemp = [];
   let finalArray = [];
@@ -155,7 +156,7 @@ function dijkstra(arr, src) {
         dist[u] != Infinity &&
         dist[u] + arr[u][v] < dist[v]
       ) {
-        dist[v] = dist[u] + arr[u][v]; // -------------------------------------> add vertex origin A,B,C,D,E...
+        dist[v] = dist[u] + arr[u][v];
         originTemp.push(u);
       } else {
         originTemp.push(0);
