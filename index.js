@@ -92,22 +92,19 @@ function printError() {
 }
 
 function minDistance(dist, sptSet, numbVertices) {
-  // Initialize min value
-  let min = Infinity; //Number.MAX_VALUE;
+  let min = Infinity;
   let min_index = -1;
 
   for (let v = 0; v < numbVertices; v++) {
-    console.log(`recorriendo vertice: ${v}`);
     if (sptSet[v] == false && dist[v] <= min) {
       min = dist[v];
       min_index = v;
-      console.log(`distancia minima y vertice: min = ${dist[v]}, v: ${v}`);
     }
   }
   return min_index;
 }
 
-function createTableDijkstra(size, arr) {
+function createTableDijkstra(arr) {
   const letters = [
     "A",
     "B",
@@ -130,9 +127,6 @@ function createTableDijkstra(size, arr) {
   while (j < arr[0].length) {
     for (let i = 0; i < arr.length; i++) {
       if (i !== 0) {
-        /*console.log(arr[i][j]);
-      console.log(`a: ${arr[i - 1][j][1]}`);
-      console.log(`b: ${arr[i][j][1]}`);*/
         if (arr[i][j][1] === 0) {
           arr[i][j][1] = arr[i - 1][j][1];
         }
@@ -165,12 +159,10 @@ function createTableDijkstra(size, arr) {
     th.innerHTML = " ";
     let tv = document.createElement("th");
     tv.innerHTML = letters[i];
-    //tv.innerHTML = "";
     vertexs.appendChild(tv);
 
     let tr = document.createElement("tr");
     tr.appendChild(th);
-    //vertexs.appendChild(tv);
     //column
     for (let j = 0; j <= arr[i].length - 1; j++) {
       let td = document.createElement("td");
@@ -217,12 +209,9 @@ function dijkstra(arr, src) {
   let originTemp = [];
   let finalOrigin = [];
   console.time("dijkstra");
-  console.log("dijkstra algorithm...");
-  console.log("origin: ", src);
-  console.log(arr);
-  // test dijsktra
   let dist = new Array(arr.length);
   let sptSet = new Array(arr.length);
+
   // Initialize all distances as
   // INFINITE and stpSet[] as false
   for (let i = 0; i < arr.length; i++) {
@@ -235,57 +224,36 @@ function dijkstra(arr, src) {
   dist[src] = 0;
   // Find shortest path for all vertices
   for (let count = 0; count < arr.length - 1; count++) {
-    console.log(`================= iteracion: ${count} =================`);
     // Pick the minimum distance vertex
     // from the set of vertices not yet
     // processed. u is always equal to
     // src in first iteration.
     let u = minDistance(dist, sptSet, arr.length);
-    console.log(`valor de u: ${u}`);
+
     // Mark the picked vertex as processed
     sptSet[u] = true;
     // Update dist value of the adjacent
     // vertices of the picked vertex.
     for (let v = 0; v < arr.length; v++) {
-      console.log(` --------------- vertice: ${v} ---------------`);
-
       // Update dist[v] only if is not in
       // sptSet, there is an edge from u
       // to v, and total weight of path
       // from src to v through u is smaller
       // than current value of dist[v]
-      console.log(sptSet[v]);
       if (
         !sptSet[v] &&
         arr[u][v] != 0 &&
         dist[u] != Infinity &&
         dist[u] + arr[u][v] < dist[v]
       ) {
-        console.log(
-          `operation: ${dist[u]} + ${arr[u][v]} = ${
-            dist[u] + arr[u][v]
-          } =>>>>>>>>>>>>>>>>>>>>>>>> u:${u} v:${v} uv:${arr[u][v]} distuv: ${
-            dist[u][v]
-          }`
-        );
         dist[v] = dist[u] + arr[u][v]; // -------------------------------------> add vertex origin A,B,C,D,E...
         originTemp.push(u);
-        console.log(`dist[v] = ${dist[v]}`);
       } else {
         originTemp.push(0);
       }
-      /*else if (arr[u][v] === 0) {
-        console.log("Es el mismo vertice");
-      } else if (dist[u] === Infinity) {
-        console.log("con este vertice no tiene conexión");
-      } else {
-        console.log("la suma de las distancias no mejora la distancia");
-      }*/
     }
 
     for (let i = 0; i < dist.length; i++) {
-      //console.log(`vertex ${i}: ${dist[i]}`);
-      //distTemp.push(`(${dist[i]}, ${u})`);
       distTemp.push(`${dist[i]}`);
     }
     //push
@@ -296,19 +264,11 @@ function dijkstra(arr, src) {
     originTemp = [];
   }
 
-  // Print the constructed distance array
-  /* console.log("RESULTADO FINAL: ");
-  for (let i = 0; i < dist.length; i++) {
-    console.log(`vertex ${i}: ${dist[i]}`);
-  }*/
-
-  //console.log(dist);
   console.log(finalOrigin);
 
   console.log(finalArray);
 
   // test modify array
-
   for (let i = 0; i < finalArray.length; i++) {
     for (let j = 0; j < finalArray[i].length; j++) {
       if (finalOrigin[i][j] !== 0) {
@@ -316,16 +276,9 @@ function dijkstra(arr, src) {
       } else {
         finalArray[i][j] = [finalArray[i][j], 0];
       }
-      //console.log(`i-j: ${i}, ${j}`);
     }
   }
-  //finalArray[0][0] = [finalArray[0][0], 0];
-  console.log("-----------------------------------------");
-  console.log(finalArray);
-  console.log("-----------------------------------------");
-  //console.log(finalArray);
-  createTableDijkstra(finalArray.length, finalArray);
-  // createMatrix(finalArray.length, finalArray);
 
+  createTableDijkstra(finalArray);
   console.timeEnd("dijkstra");
 }
