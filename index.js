@@ -125,6 +125,30 @@ function createTableDijkstra(size, arr) {
     "N",
     "O",
   ];
+  // to loop vertically through a 2d array
+  let j = 0;
+  while (j < arr[0].length) {
+    for (let i = 0; i < arr.length; i++) {
+      if (i !== 0) {
+        /*console.log(arr[i][j]);
+      console.log(`a: ${arr[i - 1][j][1]}`);
+      console.log(`b: ${arr[i][j][1]}`);*/
+        if (arr[i][j][1] === 0) {
+          arr[i][j][1] = arr[i - 1][j][1];
+        }
+      }
+    }
+    j++;
+  }
+
+  let z = 0;
+  // change numbers for letters
+  while (z < arr[0].length) {
+    for (let i = 0; i < arr.length; i++) {
+      arr[i][z][1] = letters[arr[i][z][1]];
+    }
+    z++;
+  }
   //create table
   const table = document.createElement("table");
   if (arr.length !== 0) {
@@ -280,7 +304,7 @@ function dijkstra(arr, src) {
 
   //console.log(dist);
   console.log(finalOrigin);
-  console.timeEnd("dijkstra");
+
   console.log(finalArray);
 
   // test modify array
@@ -292,12 +316,16 @@ function dijkstra(arr, src) {
       } else {
         finalArray[i][j] = [finalArray[i][j], 0];
       }
-      console.log(`i-j: ${i}, ${j}`);
+      //console.log(`i-j: ${i}, ${j}`);
     }
   }
-  finalArray[0][0] = [finalArray[0][0], 0];
-  //console.log(finalArray);
+  //finalArray[0][0] = [finalArray[0][0], 0];
+  console.log("-----------------------------------------");
+  console.log(finalArray);
+  console.log("-----------------------------------------");
   //console.log(finalArray);
   createTableDijkstra(finalArray.length, finalArray);
   // createMatrix(finalArray.length, finalArray);
+
+  console.timeEnd("dijkstra");
 }
