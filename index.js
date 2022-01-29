@@ -152,10 +152,10 @@ function createTableDijkstra(size, arr) {
       let td = document.createElement("td");
       let input = document.createElement("input");
       if (arr.length !== 0) {
-        if (arr[i][j] === "Infinity") {
-          input.value = "∞";
+        if (arr[i][j][0] === "Infinity") {
+          input.value = `∞,${arr[i][j][1]}`;
         } else {
-          input.value = arr[i][j];
+          input.value = `${arr[i][j][0]},${arr[i][j][1]}`;
         }
       }
       td.appendChild(input);
@@ -285,16 +285,18 @@ function dijkstra(arr, src) {
 
   // test modify array
 
-  /*for (let i = 0; i < finalArray.length; i++) {
+  for (let i = 0; i < finalArray.length; i++) {
     for (let j = 0; j < finalArray[i].length; j++) {
       if (finalOrigin[i][j] !== 0) {
         finalArray[i][j] = [finalArray[i][j], finalOrigin[i][j]];
+      } else {
+        finalArray[i][j] = [finalArray[i][j], 0];
       }
       console.log(`i-j: ${i}, ${j}`);
     }
   }
   finalArray[0][0] = [finalArray[0][0], 0];
-  console.log(finalArray);*/
+  //console.log(finalArray);
   //console.log(finalArray);
   createTableDijkstra(finalArray.length, finalArray);
   // createMatrix(finalArray.length, finalArray);
