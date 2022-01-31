@@ -23,9 +23,11 @@ function sizeAdjacencyMatrix(bAlgorithm) {
     matrixSize = matrixSize.value;
     if (matrixSize > 1 && matrixSize <= 15 && matrixSize.length > 0) {
       //deletingTemporalTable();
-      createAdjacencyMatrix(matrixSize);
-      const wrapper = document.querySelector(".wrapper");
-      wrapper.appendChild(bAlgorithm);
+      if (!document.querySelector(".empty")) {
+        createAdjacencyMatrix(matrixSize);
+        const wrapper = document.querySelector(".wrapper");
+        wrapper.appendChild(bAlgorithm);
+      }
     } else {
       printError();
     }
