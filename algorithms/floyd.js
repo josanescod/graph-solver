@@ -1,5 +1,5 @@
 "use strict";
-import { createMatrix as createMatrix } from "../utilDOM/utilDOM.js";
+import { createAdjacencyMatrix as createAdjacencyMatrix } from "../utilsDOM/utilsDOM.js";
 
 //floyd https://www.geeksforgeeks.org/floyd-warshall-algorithm-dp-16/
 function floyd(arr) {
@@ -30,7 +30,7 @@ function floyd(arr) {
         }
         if (valuesInMatrix === arr.length * arr.length) {
           console.log(tempMatrix);
-          createMatrix(arr.length, tempMatrix); // print tempMatrix in DOM
+          createAdjacencyMatrix(arr.length, tempMatrix); // print tempMatrix in DOM
           tempMatrix = [];
           valuesInMatrix = 0;
         }
@@ -41,4 +41,4 @@ function floyd(arr) {
   console.timeEnd("floyd");
 }
 
-export { floyd, createMatrix };
+export { floyd };

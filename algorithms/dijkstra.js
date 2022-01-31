@@ -128,7 +128,6 @@ function dijkstra(arr, src) {
     dist[i] = Infinity; //Number.MAX_VALUE;
     sptSet[i] = false;
   }
-
   // Distance of source vertex
   // from itself is always 0
   dist[src] = 0;
@@ -139,7 +138,6 @@ function dijkstra(arr, src) {
     // processed. u is always equal to
     // src in first iteration.
     let u = minDistance(dist, sptSet, arr.length);
-
     // Mark the picked vertex as processed
     sptSet[u] = true;
     // Update dist value of the adjacent
@@ -162,22 +160,17 @@ function dijkstra(arr, src) {
         originTemp.push(0);
       }
     }
-
     for (let i = 0; i < dist.length; i++) {
       distTemp.push(`${dist[i]}`);
     }
     //push
     finalArray.push(distTemp);
     distTemp = [];
-
     finalOrigin.push(originTemp);
     originTemp = [];
   }
-
   console.log(finalOrigin);
-
   console.log(finalArray);
-
   // test modify array
   for (let i = 0; i < finalArray.length; i++) {
     for (let j = 0; j < finalArray[i].length; j++) {

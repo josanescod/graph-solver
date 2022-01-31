@@ -1,6 +1,40 @@
 "use strict";
 
-function createMatrix(size, arr = []) {
+function makeButtonAlgorithm(id, functionAlgo) {
+  const bAlgo = document.createElement("button");
+  bAlgo.innerHTML = "OK";
+  bAlgo.classList.add(`${id}`, "secondary");
+  bAlgo.addEventListener("click", functionAlgo);
+  return bAlgo;
+}
+function sizeAdjacencyMatrix(bAlgorithm) {
+  const pSizeMatrix = document.createElement("p");
+  pSizeMatrix.innerHTML = "Insert size of matrix [2-15]:";
+  pSizeMatrix.classList.add("nobr");
+  const inputSizeMatrix = document.createElement("input");
+  inputSizeMatrix.id = "matrixSize";
+  inputSizeMatrix.setAttribute("type", "text");
+  const bSizeMatrix = document.createElement("button");
+  bSizeMatrix.id = "sizeButton";
+  bSizeMatrix.innerHTML = "OK";
+  const br = document.createElement("br");
+  bSizeMatrix.addEventListener("click", function () {
+    let matrixSize = document.querySelector("#matrixSize");
+    matrixSize = matrixSize.value;
+    if (matrixSize > 1 && matrixSize <= 15 && matrixSize.length > 0) {
+      //deletingTemporalTable();
+      createAdjacencyMatrix(matrixSize);
+      const wrapper = document.querySelector(".wrapper");
+      wrapper.appendChild(bAlgorithm);
+    } else {
+      printError();
+    }
+  });
+  const wrapper = document.querySelector(".wrapper");
+  wrapper.append(pSizeMatrix, inputSizeMatrix, bSizeMatrix, br);
+}
+
+function createAdjacencyMatrix(size, arr = []) {
   const letters = [
     "A",
     "B",
@@ -33,8 +67,6 @@ function createMatrix(size, arr = []) {
     th.innerHTML = letters[i];
     let tv = document.createElement("th");
     tv.innerHTML = letters[i];
-    //vertexs.appendChild(tv);
-
     let tr = document.createElement("tr");
     tr.appendChild(th);
     vertexs.appendChild(tv);
@@ -57,8 +89,12 @@ function createMatrix(size, arr = []) {
     table.appendChild(tr);
     table.insertBefore(vertexs, table.firstChild);
   }
+  const pTitle = document.createElement("p");
+  pTitle.innerHTML = "ADJACENCY MATRIX";
+
   const wrapper = document.querySelector(".wrapper");
   if (table.className === "empty") {
+    wrapper.appendChild(pTitle);
     wrapper.appendChild(table);
   } else if (table.className === "result") {
     const wrapper2 = document.querySelector(".wrapper2");
@@ -88,9 +124,9 @@ function deletingTemporalTable() {
   if (error !== null) {
     error.remove();
   }
-  const table = document.querySelector("table");
-  if (table !== null) {
-    table.remove();
+  const wrapper = document.querySelector(".wrapper");
+  while (wrapper.firstChild) {
+    wrapper.removeChild(wrapper.lastChild);
   }
   const tablesResult = document.querySelectorAll(".result");
   if (tablesResult !== null) {
@@ -102,6 +138,25 @@ function deletingTemporalTable() {
   if (dijsktraButton !== null) {
     dijsktraButton.remove();
   }
+  console.clear();
 }
 
-export { createMatrix, readTable, deletingTemporalTable };
+function printError() {
+  const error = document.querySelector(".error");
+  if (error === null) {
+    const pError = document.createElement("p");
+    pError.classList.add("error");
+    pError.innerHTML = "An error has occurred";
+    const sizeDiv = document.querySelector("#size");
+    sizeDiv.appendChild(pError);
+  }
+}
+
+export {
+  makeButtonAlgorithm,
+  sizeAdjacencyMatrix,
+  createAdjacencyMatrix,
+  readTable,
+  deletingTemporalTable,
+  printError,
+};

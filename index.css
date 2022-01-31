@@ -21,6 +21,12 @@ button {
   line-height: 1.5;
   white-space: nowrap;
   cursor: pointer;
+  width: 4.3em;
+}
+
+#clearButton {
+  background-color: #ffdc7d;
+  color: rgba(0, 0, 0, 0.7);
 }
 .nobr {
   display: inline;
@@ -29,6 +35,13 @@ button {
 
 #size {
   text-align: center;
+}
+#sizeButton,
+.secondary {
+  margin-left: 5px;
+  height: 40px;
+  width: 50px;
+  background-color: #3488ce;
 }
 
 .wrapper {
