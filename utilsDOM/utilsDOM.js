@@ -1,11 +1,29 @@
 "use strict";
 
 function makeButtonAlgorithm(id, functionAlgo) {
-  const bAlgo = document.createElement("button");
-  bAlgo.innerHTML = "OK";
-  bAlgo.classList.add(`${id}`, "secondary");
-  bAlgo.addEventListener("click", functionAlgo);
-  return bAlgo;
+  if (id === "dijkstra") {
+    const inputOrigin = document.createElement("input");
+    inputOrigin.id = "origin";
+    const pOrigin = document.createElement("p");
+    pOrigin.classList.add("nobr");
+    pOrigin.innerHTML = "Source Node: ";
+    const bAlgo = document.createElement("button");
+    bAlgo.innerHTML = "OK";
+    bAlgo.classList.add(`${id}`, "secondary");
+    bAlgo.addEventListener("click", functionAlgo);
+    const divOrigin = document.createElement("div");
+    divOrigin.classList.add("dijkstra");
+    divOrigin.appendChild(pOrigin);
+    divOrigin.appendChild(inputOrigin);
+    divOrigin.appendChild(bAlgo);
+    return divOrigin;
+  } else {
+    const bAlgo = document.createElement("button");
+    bAlgo.innerHTML = "OK";
+    bAlgo.classList.add(`${id}`, "secondary");
+    bAlgo.addEventListener("click", functionAlgo);
+    return bAlgo;
+  }
 }
 function sizeAdjacencyMatrix(bAlgorithm) {
   const pSizeMatrix = document.createElement("p");
@@ -107,8 +125,8 @@ function createAdjacencyMatrix(size, arr = []) {
 function readTable(size) {
   let arrayInputs = [];
   let newArr = [];
-  const input = document.querySelectorAll("input");
-  for (let i = 1; i < input.length; i++) {
+  const input = document.querySelectorAll("table input");
+  for (let i = 0; i < input.length; i++) {
     if (input[i].value === "-" || input[i].value === "") {
       arrayInputs.push(Infinity);
     } else {

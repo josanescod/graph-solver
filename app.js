@@ -47,28 +47,11 @@ function main() {
           const result = document.querySelector(".result");
           if (result === null) {
             let size = parseInt(matrixSize.value);
+            console.log(size);
             const matrixArray = readTable(size);
-            const inputOrigin = document.createElement("input");
-            inputOrigin.id = "origin";
-            const pOrigin = document.createElement("p");
-            pOrigin.classList.add("nobr");
-            pOrigin.innerHTML = "Source Node: ";
-            const bOrigin = document.createElement("button");
-            bOrigin.textContent = "OK";
-            bOrigin.style.marginLeft = "5px";
-            bOrigin.classList.add("secondary");
-            bOrigin.addEventListener("click", function () {
-              let origin = parseInt(document.querySelector("#origin").value);
-              dijkstra(matrixArray, origin);
-              bOrigin.disabled = true;
-            });
-            const divOrigin = document.createElement("div");
-            divOrigin.classList.add("dijkstra");
-            divOrigin.appendChild(pOrigin);
-            divOrigin.appendChild(inputOrigin);
-            divOrigin.appendChild(bOrigin);
-            const wrapper = document.querySelector(".wrapper");
-            wrapper.appendChild(divOrigin);
+            console.log("matrix: ", matrixArray);
+            let origin = parseInt(document.querySelector("#origin").value);
+            dijkstra(matrixArray, origin);
           }
         }
       });
