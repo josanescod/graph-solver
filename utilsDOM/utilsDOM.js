@@ -163,6 +163,7 @@ function deleteTemporalTable() {
 }
 
 function deleteResultTable() {
+  console.clear();
   const wrapper2 = document.querySelector(".wrapper2");
   while (wrapper2.firstChild) {
     wrapper2.removeChild(wrapper2.lastChild);

@@ -22,12 +22,10 @@ function main() {
     deleteTemporalTable();
     console.log("floyd");
     const bAlgorithm = makeButtonAlgorithm(floydButton.id, function () {
-      const result = document.querySelector(".result");
-      if (result === null) {
-        let size = parseInt(matrixSize.value);
-        const matrixArray = readDataTable(size);
-        floyd(matrixArray);
-      }
+      deleteResultTable();
+      let size = parseInt(matrixSize.value);
+      const matrixArray = readDataTable(size);
+      floyd(matrixArray);
     });
 
     sizeAdjacencyMatrix(bAlgorithm);
@@ -39,7 +37,6 @@ function main() {
     console.log("dijkstra");
     if (!document.querySelector("#matrixSize")) {
       const bAlgorithm = makeButtonAlgorithm(dijkstraButton.id, function () {
-        const result = document.querySelector(".result");
         deleteResultTable();
         let size = parseInt(matrixSize.value);
         const matrixArray = readDataTable(size);
@@ -58,7 +55,6 @@ function main() {
 
           dijkstra(matrixArray, vertices.indexOf(origin));
         } else {
-          console.log(vertices);
           printError(
             `Please enter a valid source vertex [${vertices[0]}-${
               vertices[vertices.length - 1]
