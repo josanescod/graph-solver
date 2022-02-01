@@ -128,7 +128,7 @@ function createAdjacencyMatrix(size, arr = []) {
   }
 }
 
-function readTable(size) {
+function readDataTable(size) {
   let arrayInputs = [];
   let newArr = [];
   const input = document.querySelectorAll("table input");
@@ -161,12 +161,20 @@ function deleteTemporalTable() {
   }
 }
 
+function deleteResultTable() {
+  const wrapper2 = document.querySelector(".wrapper2");
+  while (wrapper2.firstChild) {
+    wrapper2.removeChild(wrapper2.lastChild);
+  }
+}
+
 function deleteEmptyTable() {
   const emptyTable = document.querySelector(".empty");
   if (emptyTable !== null) {
     const pElements = document.querySelectorAll("p");
     pElements[1].remove();
     emptyTable.remove();
+    pElements[2].remove();
   }
   const wrapper2 = document.querySelector(".wrapper2");
   while (wrapper2.firstChild) {
@@ -196,7 +204,9 @@ export {
   makeButtonAlgorithm,
   sizeAdjacencyMatrix,
   createAdjacencyMatrix,
-  readTable,
+  readDataTable,
   deleteTemporalTable,
+  deleteResultTable,
   printError,
+  deleteError,
 };
