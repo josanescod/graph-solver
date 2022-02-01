@@ -1,5 +1,4 @@
 "use strict";
-
 function minDistance(dist, sptSet, numbVertices) {
   let min = Infinity;
   let min_index = -1;

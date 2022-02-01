@@ -56,5 +56,12 @@ button {
 
 .error {
   font-size: 14px;
-  color: red;
+  color: #f03a5f;
+  font-weight: bold;
+}
+
+.pFootnote {
+  color: #3e56c4;
+  font-size: 14px;
+  font-weight: bold;
 }

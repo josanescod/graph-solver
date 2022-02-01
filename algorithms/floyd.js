@@ -37,6 +37,7 @@ function floyd(arr) {
       }
     }
   }
+
   console.log(`number of iterations: ${count}`);
   console.timeEnd("floyd");
 }

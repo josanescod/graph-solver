@@ -40,16 +40,22 @@ function sizeAdjacencyMatrix(bAlgorithm) {
     let matrixSize = document.querySelector("#matrixSize");
     matrixSize = matrixSize.value;
     if (matrixSize > 1 && matrixSize <= 15 && matrixSize.length > 0) {
-      //deletingTemporalTable();
+      deleteError();
+      deleteEmptyTable();
       if (!document.querySelector(".empty")) {
         createAdjacencyMatrix(matrixSize);
+        const pFootnote = document.createElement("p");
+        pFootnote.classList.add("pFootnote");
+        pFootnote.innerHTML =
+          "* empty inputs are interpreted as infinite value or no connection";
         const wrapper = document.querySelector(".wrapper");
-        wrapper.appendChild(bAlgorithm);
+        wrapper.append(pFootnote, bAlgorithm);
       }
     } else {
       printError();
     }
   });
+
   const wrapper = document.querySelector(".wrapper");
   wrapper.append(pSizeMatrix, inputSizeMatrix, bSizeMatrix, br);
 }
@@ -139,7 +145,8 @@ function readTable(size) {
   return newArr;
 }
 
-function deletingTemporalTable() {
+function deleteTemporalTable() {
+  console.clear();
   const error = document.querySelector(".error");
   if (error !== null) {
     error.remove();
@@ -148,17 +155,23 @@ function deletingTemporalTable() {
   while (wrapper.firstChild) {
     wrapper.removeChild(wrapper.lastChild);
   }
-  const tablesResult = document.querySelectorAll(".result");
-  if (tablesResult !== null) {
-    tablesResult.forEach((table) => {
-      table.remove();
-    });
+  const wrapper2 = document.querySelector(".wrapper2");
+  while (wrapper2.firstChild) {
+    wrapper2.removeChild(wrapper2.lastChild);
   }
-  const dijsktraButton = document.querySelector(".dijkstra");
-  if (dijsktraButton !== null) {
-    dijsktraButton.remove();
+}
+
+function deleteEmptyTable() {
+  const emptyTable = document.querySelector(".empty");
+  if (emptyTable !== null) {
+    const pElements = document.querySelectorAll("p");
+    pElements[1].remove();
+    emptyTable.remove();
   }
-  console.clear();
+  const wrapper2 = document.querySelector(".wrapper2");
+  while (wrapper2.firstChild) {
+    wrapper2.removeChild(wrapper2.lastChild);
+  }
 }
 
 function printError() {
@@ -172,11 +185,18 @@ function printError() {
   }
 }
 
+function deleteError() {
+  const error = document.querySelector(".error");
+  if (error !== null) {
+    error.remove();
+  }
+}
+
 export {
   makeButtonAlgorithm,
   sizeAdjacencyMatrix,
   createAdjacencyMatrix,
   readTable,
-  deletingTemporalTable,
+  deleteTemporalTable,
   printError,
 };
