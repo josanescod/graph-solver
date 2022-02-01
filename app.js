@@ -40,31 +40,31 @@ function main() {
     if (!document.querySelector("#matrixSize")) {
       const bAlgorithm = makeButtonAlgorithm(dijkstraButton.id, function () {
         const result = document.querySelector(".result");
-        /*if (result === null) {*/
         deleteResultTable();
         let size = parseInt(matrixSize.value);
         const matrixArray = readDataTable(size);
-        //select th vertexs, add on array, delete first element,send index of array like origin
-        const trvertexs = document
+        //select th vertices, add on array, delete first element,send index of array like origin
+        const trvertices = document
           .querySelector("table tr ")
           .querySelectorAll("th");
-        console.log(trvertexs);
 
-        const vertexs = [];
-        for (let i = 1; i < trvertexs.length; i++) {
-          vertexs.push(trvertexs[i].innerText);
+        const vertices = [];
+        for (let i = 1; i < trvertices.length; i++) {
+          vertices.push(trvertices[i].innerText);
         }
-        console.log("vertexs", vertexs);
         let origin = document.querySelector("#origin").value.toUpperCase();
-        console.log(origin);
-        if (vertexs.indexOf(origin) !== -1) {
+        if (vertices.indexOf(origin) !== -1) {
           deleteError();
-          console.log(vertexs.indexOf(origin));
-          dijkstra(matrixArray, vertexs.indexOf(origin));
+
+          dijkstra(matrixArray, vertices.indexOf(origin));
         } else {
-          printError();
+          console.log(vertices);
+          printError(
+            `Please enter a valid source vertex [${vertices[0]}-${
+              vertices[vertices.length - 1]
+            }]`
+          );
         }
-        /*}*/
       });
       sizeAdjacencyMatrix(bAlgorithm);
     }

@@ -12,7 +12,7 @@ function minDistance(dist, sptSet, numbVertices) {
   return min_index;
 }
 
-function createTableDijkstra(arr) {
+function createTableDijkstra(arr, src) {
   const letters = [
     "A",
     "B",
@@ -30,14 +30,19 @@ function createTableDijkstra(arr) {
     "N",
     "O",
   ];
+
   // to loop vertically through a 2d array
   let j = 0;
   while (j < arr[0].length) {
     for (let i = 0; i < arr.length; i++) {
       if (i !== 0) {
-        if (arr[i][j][1] === 0) {
+        if (j === src) {
+          arr[i][j][1] = src;
+        } else if (arr[i][j][1] === 0) {
           arr[i][j][1] = arr[i - 1][j][1];
         }
+      } else {
+        arr[i][j][1] = src;
       }
     }
     j++;
@@ -181,7 +186,7 @@ function dijkstra(arr, src) {
     }
   }
 
-  createTableDijkstra(finalArray);
+  createTableDijkstra(finalArray, src);
   console.timeEnd("dijkstra");
 }
 

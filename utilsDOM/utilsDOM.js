@@ -6,7 +6,7 @@ function makeButtonAlgorithm(id, functionAlgo) {
     inputOrigin.id = "origin";
     const pOrigin = document.createElement("p");
     pOrigin.classList.add("nobr");
-    pOrigin.innerHTML = "Source Node: ";
+    pOrigin.innerHTML = "Source vertex: ";
     const bAlgo = document.createElement("button");
     bAlgo.innerHTML = "OK";
     bAlgo.classList.add(`${id}`, "secondary");
@@ -26,8 +26,9 @@ function makeButtonAlgorithm(id, functionAlgo) {
   }
 }
 function sizeAdjacencyMatrix(bAlgorithm) {
+  const maxVertices = 10;
   const pSizeMatrix = document.createElement("p");
-  pSizeMatrix.innerHTML = "Insert size of matrix [2-15]:";
+  pSizeMatrix.innerHTML = `Insert number of vertices [2-${maxVertices}]:`;
   pSizeMatrix.classList.add("nobr");
   const inputSizeMatrix = document.createElement("input");
   inputSizeMatrix.id = "matrixSize";
@@ -39,7 +40,7 @@ function sizeAdjacencyMatrix(bAlgorithm) {
   bSizeMatrix.addEventListener("click", function () {
     let matrixSize = document.querySelector("#matrixSize");
     matrixSize = matrixSize.value;
-    if (matrixSize > 1 && matrixSize <= 15 && matrixSize.length > 0) {
+    if (matrixSize > 1 && matrixSize <= maxVertices && matrixSize.length > 0) {
       deleteError();
       deleteEmptyTable();
       if (!document.querySelector(".empty")) {
@@ -52,7 +53,7 @@ function sizeAdjacencyMatrix(bAlgorithm) {
         wrapper.append(pFootnote, bAlgorithm);
       }
     } else {
-      printError();
+      printError(`Please insert a valid number of vertices [2-${maxVertices}]`);
     }
   });
 
@@ -182,12 +183,12 @@ function deleteEmptyTable() {
   }
 }
 
-function printError() {
+function printError(message) {
   const error = document.querySelector(".error");
   if (error === null) {
     const pError = document.createElement("p");
     pError.classList.add("error");
-    pError.innerHTML = "An error has occurred";
+    pError.innerHTML = message;
     const sizeDiv = document.querySelector("#size");
     sizeDiv.appendChild(pError);
   }
