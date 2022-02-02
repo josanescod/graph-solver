@@ -25,6 +25,7 @@ function makeButtonAlgorithm(id, functionAlgo) {
     return bAlgo;
   }
 }
+
 function sizeAdjacencyMatrix(bAlgorithm) {
   const maxVertices = 10;
   const pSizeMatrix = document.createElement("p");
@@ -161,6 +162,10 @@ function deleteTemporalTable() {
   while (wrapper2.firstChild) {
     wrapper2.removeChild(wrapper2.lastChild);
   }
+  const bSelected = document.querySelector(".selected");
+  if (bSelected !== null) {
+    bSelected.classList.remove("selected");
+  }
 }
 
 function deleteResultTable() {
@@ -191,8 +196,8 @@ function printError(message) {
     const pError = document.createElement("p");
     pError.classList.add("error");
     pError.innerHTML = message;
-    const sizeDiv = document.querySelector("#size");
-    sizeDiv.appendChild(pError);
+    const menuDiv = document.querySelector("#menu");
+    menuDiv.appendChild(pError);
   }
 }
 
@@ -200,6 +205,16 @@ function deleteError() {
   const error = document.querySelector(".error");
   if (error !== null) {
     error.remove();
+  }
+}
+
+function selectedButton(button) {
+  const bSelected = document.querySelector(".selected");
+  if (bSelected === null) {
+    button.classList.add("selected");
+  } else {
+    bSelected.classList.remove("selected");
+    button.classList.add("selected");
   }
 }
 
@@ -212,4 +227,5 @@ export {
   deleteResultTable,
   printError,
   deleteError,
+  selectedButton,
 };

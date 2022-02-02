@@ -10,6 +10,7 @@ import {
   printError as printError,
   makeButtonAlgorithm as makeButtonAlgorithm,
   deleteError as deleteError,
+  selectedButton as selectedButton,
 } from "../utilsDOM/utilsDOM.js";
 
 window.onload = () => {
@@ -21,6 +22,7 @@ function main() {
   floydButton.addEventListener("click", function () {
     deleteTemporalTable();
     console.log("floyd");
+    selectedButton(this);
     const bAlgorithm = makeButtonAlgorithm(floydButton.id, function () {
       deleteResultTable();
       let size = parseInt(matrixSize.value);
@@ -35,6 +37,7 @@ function main() {
   dijkstraButton.addEventListener("click", function () {
     deleteTemporalTable();
     console.log("dijkstra");
+    selectedButton(this);
     if (!document.querySelector("#matrixSize")) {
       const bAlgorithm = makeButtonAlgorithm(dijkstraButton.id, function () {
         deleteResultTable();
