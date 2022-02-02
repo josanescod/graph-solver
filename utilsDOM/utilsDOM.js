@@ -39,6 +39,7 @@ function sizeAdjacencyMatrix(bAlgorithm) {
   bSizeMatrix.innerHTML = "OK";
   const br = document.createElement("br");
   bSizeMatrix.addEventListener("click", function () {
+    selectedAnimatedButton(this, "clicked");
     let matrixSize = document.querySelector("#matrixSize");
     matrixSize = matrixSize.value;
     if (matrixSize > 1 && matrixSize <= maxVertices && matrixSize.length > 0) {
@@ -218,13 +219,13 @@ function selectedButton(button) {
   }
 }
 
-function selectedClearButton(button) {
-  const bCleared = document.querySelector(".cleared");
+function selectedAnimatedButton(button, attribute) {
+  const bCleared = document.querySelector(`.${attribute}`);
   if (bCleared === null) {
-    button.classList.add("cleared");
+    button.classList.add(`${attribute}`);
     button.disabled = true;
     window.setTimeout(function () {
-      button.classList.remove("cleared");
+      button.classList.remove(`${attribute}`);
       button.disabled = false;
     }, 250);
   }
@@ -232,9 +233,7 @@ function selectedClearButton(button) {
 
 function footerData() {
   const date = new Date().getFullYear();
-  console.log(date);
   const footerText = document.querySelector(".footerText");
-  console.log(footerText);
   footerText.innerText = date;
 }
 
@@ -248,6 +247,6 @@ export {
   printError,
   deleteError,
   selectedButton,
-  selectedClearButton,
+  selectedAnimatedButton,
   footerData,
 };

@@ -11,7 +11,7 @@ import {
   makeButtonAlgorithm as makeButtonAlgorithm,
   deleteError as deleteError,
   selectedButton as selectedButton,
-  selectedClearButton as selectedClearButton,
+  selectedAnimatedButton as selectedAnimatedButton,
   footerData as footerData,
 } from "../utilsDOM/utilsDOM.js";
 
@@ -26,6 +26,7 @@ function main() {
     console.log("floyd");
     selectedButton(this);
     const bAlgorithm = makeButtonAlgorithm(floydButton.id, function () {
+      selectedAnimatedButton(this, "clicked");
       deleteResultTable();
       let size = parseInt(matrixSize.value);
       const matrixArray = readDataTable(size);
@@ -42,6 +43,7 @@ function main() {
     selectedButton(this);
     if (!document.querySelector("#matrixSize")) {
       const bAlgorithm = makeButtonAlgorithm(dijkstraButton.id, function () {
+        selectedAnimatedButton(this, "clicked");
         deleteResultTable();
         let size = parseInt(matrixSize.value);
         const matrixArray = readDataTable(size);
@@ -57,7 +59,6 @@ function main() {
         let origin = document.querySelector("#origin").value.toUpperCase();
         if (vertices.indexOf(origin) !== -1) {
           deleteError();
-
           dijkstra(matrixArray, vertices.indexOf(origin));
         } else {
           printError(
@@ -73,7 +74,7 @@ function main() {
 
   const clearButton = document.querySelector("#clearButton");
   clearButton.addEventListener("click", function () {
-    selectedClearButton(this);
+    selectedAnimatedButton(this, "cleared");
     if (document.querySelector("#matrixSize")) {
       deleteTemporalTable();
     }
