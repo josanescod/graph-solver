@@ -56,7 +56,10 @@ function main() {
         for (let i = 1; i < trvertices.length; i++) {
           vertices.push(trvertices[i].innerText);
         }
-        let origin = document.querySelector("#origin").value.toUpperCase();
+        let origin = document
+          .querySelector("#origin")
+          .value.toUpperCase()
+          .trim();
         if (vertices.indexOf(origin) !== -1) {
           deleteError();
           dijkstra(matrixArray, vertices.indexOf(origin));
