@@ -16,7 +16,7 @@ function floyd(arr) {
       for (let j = 0; j < arr.length; j++) {
         count++;
         if (arr[i][k] + arr[k][j] < arr[i][j]) {
-          finalArray[i][j] = arr[i][k] + arr[k][j]; // if you remove this line it doesn't work
+          finalArray[i][j] = arr[i][k] + arr[k][j]; // workaround if you remove this line it doesn't work
           tempOPS.push(arr[i][k] + arr[k][j]);
         } else {
           tempOPS.push(arr[i][j]);
@@ -30,7 +30,7 @@ function floyd(arr) {
         }
         if (valuesInMatrix === arr.length * arr.length) {
           console.log(tempMatrix);
-          createAdjacencyMatrix(arr.length, tempMatrix); // print tempMatrix in DOM
+          createAdjacencyMatrix(arr.length, tempMatrix);
           tempMatrix = [];
           valuesInMatrix = 0;
         }

@@ -34,10 +34,9 @@ button {
 }
 .nobr {
   display: inline;
-  /*font-size: 1.5rem;*/
 }
 
-#size {
+#menu {
   text-align: center;
 }
 #sizeButton,
@@ -54,7 +53,6 @@ button {
 
 .empty,
 .result {
-  /*  border: 1px solid black;*/
   margin: 0 auto;
 }
 
@@ -76,4 +74,8 @@ input:disabled {
   border-width: 1.9px;
   padding: 1px 2px 1px 2px;
   color: black;
+}
+
+.selected {
+  background-color: purple;
 }
