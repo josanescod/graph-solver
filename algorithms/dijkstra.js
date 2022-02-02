@@ -97,12 +97,12 @@ function createTableDijkstra(arr, src) {
     table.insertBefore(vertexs, table.firstChild);
   }
 
-  const wrapper = document.querySelector(".wrapper");
+  const dataEntry = document.querySelector(".dataEntry");
   if (table.className === "empty") {
-    wrapper.appendChild(table);
+    dataEntry.appendChild(table);
   } else if (table.className === "result") {
-    const wrapper2 = document.querySelector(".wrapper2");
-    wrapper2.appendChild(table);
+    const solution = document.querySelector(".solution");
+    solution.appendChild(table);
   }
   // A B C D ....
   // create new Row with letters and put firstElement table 'result'

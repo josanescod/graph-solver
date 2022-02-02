@@ -11,6 +11,10 @@ input {
   width: 28px;
 }
 
+nav {
+  text-align: center;
+}
+
 button {
   margin-top: 5px;
   background-color: #3e56c4;
@@ -34,27 +38,25 @@ button {
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
 }
 
-#clearButton {
-  background-color: #ffdc7d;
-  color: rgba(0, 0, 0, 0.7);
+footer {
+  padding: 40px;
+  text-align: center;
 }
+
+input:disabled {
+  background-color: #fff;
+  border-color: #6d6d6d;
+  border-width: 1.9px;
+  padding: 1px 2px 1px 2px;
+  color: black;
+}
+
 .nobr {
   display: inline;
   margin-right: 2px;
 }
 
-#menu {
-  text-align: center;
-}
-#sizeButton,
-.secondary {
-  margin-left: 5px;
-  height: 40px;
-  width: 50px;
-  background-color: #3488ce;
-}
-
-.wrapper {
+.dataEntry {
   text-align: center;
 }
 
@@ -75,14 +77,6 @@ button {
   font-weight: bold;
 }
 
-input:disabled {
-  background-color: #fff;
-  border-color: #6d6d6d;
-  border-width: 1.9px;
-  padding: 1px 2px 1px 2px;
-  color: black;
-}
-
 .selected,
 .clicked {
   background-color: rgb(62, 86, 196, 0.7);
@@ -99,15 +93,23 @@ input:disabled {
   color: rgba(0, 0, 0, 0.7);
 }
 
-footer {
-  padding: 40px;
-  text-align: center;
-}
-
 .footerText {
   color: #aaa;
   font-size: 12px;
   display: inline-block;
   padding: 10px;
   border-top: 1px solid #ddd;
+}
+
+.secondary,
+#sizeButton {
+  margin-left: 5px;
+  height: 40px;
+  width: 50px;
+  background-color: #3488ce;
+}
+
+#clearButton {
+  background-color: #ffdc7d;
+  color: rgba(0, 0, 0, 0.7);
 }

@@ -51,16 +51,16 @@ function sizeAdjacencyMatrix(bAlgorithm) {
         pFootnote.classList.add("pFootnote");
         pFootnote.innerHTML =
           "* empty inputs are interpreted as infinite value or no connection";
-        const wrapper = document.querySelector(".wrapper");
-        wrapper.append(pFootnote, bAlgorithm);
+        const dataEntry = document.querySelector(".dataEntry");
+        dataEntry.append(pFootnote, bAlgorithm);
       }
     } else {
       printError(`Please insert a valid number of vertices [2-${maxVertices}]`);
     }
   });
 
-  const wrapper = document.querySelector(".wrapper");
-  wrapper.append(pSizeMatrix, inputSizeMatrix, bSizeMatrix, br);
+  const dataEntry = document.querySelector(".dataEntry");
+  dataEntry.append(pSizeMatrix, inputSizeMatrix, bSizeMatrix, br);
 }
 
 function createAdjacencyMatrix(size, arr = []) {
@@ -122,13 +122,13 @@ function createAdjacencyMatrix(size, arr = []) {
   const pTitle = document.createElement("p");
   pTitle.innerHTML = "ADJACENCY MATRIX";
 
-  const wrapper = document.querySelector(".wrapper");
+  const dataEntry = document.querySelector(".dataEntry");
   if (table.className === "empty") {
-    wrapper.appendChild(pTitle);
-    wrapper.appendChild(table);
+    dataEntry.appendChild(pTitle);
+    dataEntry.appendChild(table);
   } else if (table.className === "result") {
-    const wrapper2 = document.querySelector(".wrapper2");
-    wrapper2.appendChild(table);
+    const solution = document.querySelector(".solution");
+    solution.appendChild(table);
   }
 }
 
@@ -155,13 +155,13 @@ function deleteTemporalTable() {
   if (error !== null) {
     error.remove();
   }
-  const wrapper = document.querySelector(".wrapper");
-  while (wrapper.firstChild) {
-    wrapper.removeChild(wrapper.lastChild);
+  const dataEntry = document.querySelector(".dataEntry");
+  while (dataEntry.firstChild) {
+    dataEntry.removeChild(dataEntry.lastChild);
   }
-  const wrapper2 = document.querySelector(".wrapper2");
-  while (wrapper2.firstChild) {
-    wrapper2.removeChild(wrapper2.lastChild);
+  const solution = document.querySelector(".solution");
+  while (solution.firstChild) {
+    solution.removeChild(solution.lastChild);
   }
   const bSelected = document.querySelector(".selected");
   if (bSelected !== null) {
@@ -171,9 +171,9 @@ function deleteTemporalTable() {
 
 function deleteResultTable() {
   console.clear();
-  const wrapper2 = document.querySelector(".wrapper2");
-  while (wrapper2.firstChild) {
-    wrapper2.removeChild(wrapper2.lastChild);
+  const solution = document.querySelector(".solution");
+  while (solution.firstChild) {
+    solution.removeChild(solution.lastChild);
   }
 }
 
@@ -185,9 +185,9 @@ function deleteEmptyTable() {
     emptyTable.remove();
     pElements[2].remove();
   }
-  const wrapper2 = document.querySelector(".wrapper2");
-  while (wrapper2.firstChild) {
-    wrapper2.removeChild(wrapper2.lastChild);
+  const solution = document.querySelector(".solution");
+  while (solution.firstChild) {
+    solution.removeChild(solution.lastChild);
   }
 }
 
@@ -197,7 +197,7 @@ function printError(message) {
     const pError = document.createElement("p");
     pError.classList.add("error");
     pError.innerHTML = message;
-    const menuDiv = document.querySelector("#menu");
+    const menuDiv = document.querySelector("nav");
     menuDiv.appendChild(pError);
   }
 }
