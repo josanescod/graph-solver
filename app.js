@@ -11,6 +11,8 @@ import {
   makeButtonAlgorithm as makeButtonAlgorithm,
   deleteError as deleteError,
   selectedButton as selectedButton,
+  selectedClearButton as selectedClearButton,
+  footerData as footerData,
 } from "../utilsDOM/utilsDOM.js";
 
 window.onload = () => {
@@ -71,8 +73,11 @@ function main() {
 
   const clearButton = document.querySelector("#clearButton");
   clearButton.addEventListener("click", function () {
+    selectedClearButton(this);
     if (document.querySelector("#matrixSize")) {
       deleteTemporalTable();
     }
   });
+
+  footerData();
 }

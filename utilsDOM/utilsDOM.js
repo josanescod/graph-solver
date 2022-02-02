@@ -218,6 +218,26 @@ function selectedButton(button) {
   }
 }
 
+function selectedClearButton(button) {
+  const bCleared = document.querySelector(".cleared");
+  if (bCleared === null) {
+    button.classList.add("cleared");
+    button.disabled = true;
+    window.setTimeout(function () {
+      button.classList.remove("cleared");
+      button.disabled = false;
+    }, 250);
+  }
+}
+
+function footerData() {
+  const date = new Date().getFullYear();
+  console.log(date);
+  const footerText = document.querySelector(".footerText");
+  console.log(footerText);
+  footerText.innerText = date;
+}
+
 export {
   makeButtonAlgorithm,
   sizeAdjacencyMatrix,
@@ -228,4 +248,6 @@ export {
   printError,
   deleteError,
   selectedButton,
+  selectedClearButton,
+  footerData,
 };
