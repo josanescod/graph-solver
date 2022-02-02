@@ -102,6 +102,7 @@ function createAdjacencyMatrix(size, arr = []) {
       let td = document.createElement("td");
       let input = document.createElement("input");
       if (arr.length !== 0) {
+        input.disabled = true;
         if (arr[i][j] === Infinity) {
           input.value = "∞";
         } else {

@@ -81,6 +81,8 @@ function createTableDijkstra(arr, src) {
       let td = document.createElement("td");
       let input = document.createElement("input");
       if (arr.length !== 0) {
+        input.disabled = true;
+        input.setAttribute("type", "text");
         if (arr[i][j][0] === "Infinity") {
           input.value = `∞,${arr[i][j][1]}`;
         } else {
