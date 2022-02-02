@@ -10,12 +10,13 @@ import {
   printError as printError,
   makeButtonAlgorithm as makeButtonAlgorithm,
   deleteError as deleteError,
-  selectedButton as selectedButton,
-  selectedAnimatedButton as selectedAnimatedButton,
-  footerData as footerData,
+  principalButtonsAnimation as principalButtonsAnimation,
+  secondaryButtonsAnimation as secondaryButtonsAnimation,
+  createStructure as createStructure,
 } from "../utilsDOM/utilsDOM.js";
 
 window.onload = () => {
+  createStructure();
   main();
 };
 
@@ -24,9 +25,9 @@ function main() {
   floydButton.addEventListener("click", function () {
     deleteTemporalTable();
     console.log("floyd");
-    selectedButton(this);
+    principalButtonsAnimation(this);
     const bAlgorithm = makeButtonAlgorithm(floydButton.id, function () {
-      selectedAnimatedButton(this, "clicked");
+      secondaryButtonsAnimation(this, "clicked");
       deleteResultTable();
       let size = parseInt(matrixSize.value);
       const matrixArray = readDataTable(size);
@@ -40,10 +41,10 @@ function main() {
   dijkstraButton.addEventListener("click", function () {
     deleteTemporalTable();
     console.log("dijkstra");
-    selectedButton(this);
+    principalButtonsAnimation(this);
     if (!document.querySelector("#matrixSize")) {
       const bAlgorithm = makeButtonAlgorithm(dijkstraButton.id, function () {
-        selectedAnimatedButton(this, "clicked");
+        secondaryButtonsAnimation(this, "clicked");
         deleteResultTable();
         let size = parseInt(matrixSize.value);
         const matrixArray = readDataTable(size);
@@ -72,13 +73,11 @@ function main() {
     }
   });
 
-  const clearButton = document.querySelector("#clearButton");
-  clearButton.addEventListener("click", function () {
-    selectedAnimatedButton(this, "cleared");
+  const clearContent = document.querySelector("#clearContent");
+  clearContent.addEventListener("click", function () {
+    secondaryButtonsAnimation(this, "cleared");
     if (document.querySelector("#matrixSize")) {
       deleteTemporalTable();
     }
   });
-
-  footerData();
 }

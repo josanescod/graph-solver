@@ -39,7 +39,7 @@ function sizeAdjacencyMatrix(bAlgorithm) {
   bSizeMatrix.innerHTML = "OK";
   const br = document.createElement("br");
   bSizeMatrix.addEventListener("click", function () {
-    selectedAnimatedButton(this, "clicked");
+    secondaryButtonsAnimation(this, "clicked");
     let matrixSize = document.querySelector("#matrixSize");
     matrixSize = matrixSize.value;
     if (matrixSize > 1 && matrixSize <= maxVertices && matrixSize.length > 0) {
@@ -209,7 +209,7 @@ function deleteError() {
   }
 }
 
-function selectedButton(button) {
+function principalButtonsAnimation(button) {
   const bSelected = document.querySelector(".selected");
   if (bSelected === null) {
     button.classList.add("selected");
@@ -219,7 +219,7 @@ function selectedButton(button) {
   }
 }
 
-function selectedAnimatedButton(button, attribute) {
+function secondaryButtonsAnimation(button, attribute) {
   const bCleared = document.querySelector(`.${attribute}`);
   if (bCleared === null) {
     button.classList.add(`${attribute}`);
@@ -237,6 +237,36 @@ function footerData() {
   footerText.innerText = date;
 }
 
+function createStructure() {
+  const idButtons = ["floyd", "dijkstra", "clearContent"];
+  const sections = ["dataEntry", "solution", "footer"]; //nav
+  const nav = document.createElement("nav");
+  for (let id of idButtons) {
+    let newButton = document.createElement("button");
+    newButton.id = id;
+    if (id === "clearContent") {
+      id = "clear";
+    }
+    newButton.innerText = id;
+    newButton.classList.add("capitalize");
+    nav.appendChild(newButton);
+  }
+  document.body.appendChild(nav);
+  //sections
+  for (let section of sections) {
+    let newSection = document.createElement("section");
+    if (section === "footer") {
+      const footer = document.createElement("footer");
+      newSection.classList.add("footerText");
+      footer.appendChild(newSection);
+      document.body.appendChild(footer);
+      footerData();
+    } else {
+      newSection.classList.add(section);
+      document.body.appendChild(newSection);
+    }
+  }
+}
 export {
   makeButtonAlgorithm,
   sizeAdjacencyMatrix,
@@ -246,7 +276,7 @@ export {
   deleteResultTable,
   printError,
   deleteError,
-  selectedButton,
-  selectedAnimatedButton,
-  footerData,
+  principalButtonsAnimation,
+  secondaryButtonsAnimation,
+  createStructure,
 };

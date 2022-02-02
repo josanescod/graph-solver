@@ -31,8 +31,6 @@ button {
   line-height: 1.5;
   white-space: nowrap;
   cursor: pointer;
-  /*width: 4.3em;*/
-  /* changes? */
   font-weight: bold;
   padding: 8px 12px;
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
@@ -93,6 +91,10 @@ input:disabled {
   color: rgba(0, 0, 0, 0.7);
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
+
 .footerText {
   color: #aaa;
   font-size: 12px;
@@ -109,7 +111,7 @@ input:disabled {
   background-color: #3488ce;
 }
 
-#clearButton {
+#clearContent {
   background-color: #ffdc7d;
   color: rgba(0, 0, 0, 0.7);
 }
