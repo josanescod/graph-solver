@@ -26,13 +26,13 @@ function makeButtonAlgorithm(id, functionAlgo) {
   }
 }
 
-function sizeAdjacencyMatrix(bAlgorithm) {
+function numVertices(bAlgorithm) {
   const maxVertices = 10;
   const pSizeMatrix = document.createElement("p");
   pSizeMatrix.innerHTML = `Insert number of vertices [2-${maxVertices}]:`;
   pSizeMatrix.classList.add("nobr");
   const inputSizeMatrix = document.createElement("input");
-  inputSizeMatrix.id = "matrixSize";
+  inputSizeMatrix.id = "nVertices";
   inputSizeMatrix.setAttribute("type", "text");
   const bSizeMatrix = document.createElement("button");
   bSizeMatrix.id = "sizeButton";
@@ -40,19 +40,28 @@ function sizeAdjacencyMatrix(bAlgorithm) {
   const br = document.createElement("br");
   bSizeMatrix.addEventListener("click", function () {
     secondaryButtonsAnimation(this, "clicked");
-    let matrixSize = document.querySelector("#matrixSize");
-    matrixSize = matrixSize.value;
-    if (matrixSize > 1 && matrixSize <= maxVertices && matrixSize.length > 0) {
+    let nVertices = document.querySelector("#nVertices");
+    nVertices = nVertices.value;
+    if (nVertices > 1 && nVertices <= maxVertices && nVertices.length > 0) {
       deleteError();
       deleteEmptyTable();
+
       if (!document.querySelector(".empty")) {
-        createAdjacencyMatrix(matrixSize);
-        const pFootnote = document.createElement("p");
-        pFootnote.classList.add("pFootnote");
-        pFootnote.innerHTML =
-          "* empty inputs are interpreted as infinite value or no connection";
-        const dataEntry = document.querySelector(".dataEntry");
-        dataEntry.append(pFootnote, bAlgorithm);
+        const algorithm = bAlgorithm.className.split(" ")[0];
+        // how to check if bAlgorithm is havel-hakimi or not, in the first case print a table 1 x n
+        if (algorithm === "havel-hakimi") {
+          console.log("executing... :", algorithm);
+          createTable1rowncolumns();
+        } else {
+          createAdjacencyMatrix(nVertices);
+          const pFootnote = document.createElement("p");
+          pFootnote.classList.add("pFootnote");
+          pFootnote.innerHTML =
+            "* empty inputs are interpreted as infinite value or no connection";
+          const dataEntry = document.querySelector(".dataEntry");
+
+          dataEntry.append(pFootnote, bAlgorithm);
+        }
       }
     } else {
       printError(`Please insert a valid number of vertices [2-${maxVertices}]`);
@@ -63,7 +72,10 @@ function sizeAdjacencyMatrix(bAlgorithm) {
   dataEntry.append(pSizeMatrix, inputSizeMatrix, bSizeMatrix, br);
 }
 
+function createTable1rowncolumns() {}
+
 function createAdjacencyMatrix(size, arr = []) {
+  i;
   const letters = [
     "A",
     "B",
@@ -189,6 +201,11 @@ function deleteEmptyTable() {
   while (solution.firstChild) {
     solution.removeChild(solution.lastChild);
   }
+  const origin = document.querySelector("#origin");
+  if (origin !== null) {
+    origin.value = "";
+    console.log(origin);
+  }
 }
 
 function printError(message) {
@@ -238,7 +255,7 @@ function footerData() {
 }
 
 function createStructure() {
-  const idButtons = ["floyd", "dijkstra", "clearContent"];
+  const idButtons = ["floyd", "dijkstra", "havel-hakimi", "clearContent"];
   const sections = ["dataEntry", "solution", "footer"]; //nav
   const nav = document.createElement("nav");
   for (let id of idButtons) {
@@ -267,9 +284,10 @@ function createStructure() {
     }
   }
 }
+
 export {
   makeButtonAlgorithm,
-  sizeAdjacencyMatrix,
+  numVertices,
   createAdjacencyMatrix,
   readDataTable,
   deleteTemporalTable,

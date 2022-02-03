@@ -3,7 +3,7 @@
 import { floyd as floyd } from "./algorithms/floyd.js";
 import { dijkstra as dijkstra } from "./algorithms/dijkstra.js";
 import {
-  sizeAdjacencyMatrix as sizeAdjacencyMatrix,
+  numVertices as numVertices,
   readDataTable as readDataTable,
   deleteTemporalTable as deleteTemporalTable,
   deleteResultTable as deleteResultTable,
@@ -16,37 +16,56 @@ import {
 } from "../utilsDOM/utilsDOM.js";
 
 window.onload = () => {
-  createStructure();
   main();
 };
 
 function main() {
-  const floydButton = document.querySelector("#floyd");
-  floydButton.addEventListener("click", function () {
+  createStructure();
+
+  const bHavelHakimi = document.querySelector("#havel-hakimi");
+  bHavelHakimi.addEventListener("click", function () {
+    deleteTemporalTable();
+    console.log("havel-hakimi");
+    principalButtonsAnimation(this);
+
+    const bAlgorithm = makeButtonAlgorithm(bHavelHakimi.id, function () {
+      secondaryButtonsAnimation(this, "clicked");
+
+      /*deleteResultTable();
+      let size = parseInt(nVertices.value);
+      const matrixArray = readDataTable(size);
+      floyd(matrixArray);*/
+    });
+
+    numVertices(bAlgorithm);
+  });
+
+  const bFloyd = document.querySelector("#floyd");
+  bFloyd.addEventListener("click", function () {
     deleteTemporalTable();
     console.log("floyd");
     principalButtonsAnimation(this);
-    const bAlgorithm = makeButtonAlgorithm(floydButton.id, function () {
+    const bAlgorithm = makeButtonAlgorithm(bFloyd.id, function () {
       secondaryButtonsAnimation(this, "clicked");
       deleteResultTable();
-      let size = parseInt(matrixSize.value);
+      let size = parseInt(nVertices.value);
       const matrixArray = readDataTable(size);
       floyd(matrixArray);
     });
 
-    sizeAdjacencyMatrix(bAlgorithm);
+    numVertices(bAlgorithm);
   });
 
-  const dijkstraButton = document.querySelector("#dijkstra");
-  dijkstraButton.addEventListener("click", function () {
+  const bDijkstra = document.querySelector("#dijkstra");
+  bDijkstra.addEventListener("click", function () {
     deleteTemporalTable();
     console.log("dijkstra");
     principalButtonsAnimation(this);
-    if (!document.querySelector("#matrixSize")) {
-      const bAlgorithm = makeButtonAlgorithm(dijkstraButton.id, function () {
+    if (!document.querySelector("#nVertices")) {
+      const bAlgorithm = makeButtonAlgorithm(bDijkstra.id, function () {
         secondaryButtonsAnimation(this, "clicked");
         deleteResultTable();
-        let size = parseInt(matrixSize.value);
+        let size = parseInt(nVertices.value);
         const matrixArray = readDataTable(size);
         //select th vertices, add on array, delete first element,send index of array like origin
         const trvertices = document
@@ -69,14 +88,14 @@ function main() {
           );
         }
       });
-      sizeAdjacencyMatrix(bAlgorithm);
+      numVertices(bAlgorithm);
     }
   });
 
   const clearContent = document.querySelector("#clearContent");
   clearContent.addEventListener("click", function () {
     secondaryButtonsAnimation(this, "cleared");
-    if (document.querySelector("#matrixSize")) {
+    if (document.querySelector("#nVertices")) {
       deleteTemporalTable();
     }
   });
