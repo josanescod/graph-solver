@@ -2,6 +2,8 @@
 
 import { floyd as floyd } from "./algorithms/floyd.js";
 import { dijkstra as dijkstra } from "./algorithms/dijkstra.js";
+import { havelhakimi as havelhakimi } from "./algorithms/havelhakimi.js";
+
 import {
   numVertices as numVertices,
   readDataTable as readDataTable,
@@ -31,12 +33,10 @@ function main() {
 
     const bAlgorithm = makeButtonAlgorithm(bHavelHakimi.id, function () {
       secondaryButtonsAnimation(this, "clicked");
-
       deleteResultTable();
       let size = parseInt(nVertices.value);
       const matrixArray = readHavelHakimiTable(size);
-      console.log(matrixArray);
-      /*floyd(matrixArray);*/
+      havelhakimi(matrixArray);
     });
 
     numVertices(bAlgorithm);
@@ -73,7 +73,6 @@ function main() {
         const trvertices = document
           .querySelector("table tr ")
           .querySelectorAll("th");
-
         const vertices = [];
         for (let i = 1; i < trvertices.length; i++) {
           vertices.push(trvertices[i].innerText);
