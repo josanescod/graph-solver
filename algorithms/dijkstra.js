@@ -1,4 +1,7 @@
 "use strict";
+
+import { letters as letters } from "../utilsDOM/utilsDOM.js";
+
 function minDistance(dist, sptSet, numbVertices) {
   let min = Infinity;
   let min_index = -1;
@@ -13,24 +16,6 @@ function minDistance(dist, sptSet, numbVertices) {
 }
 
 function createTableDijkstra(arr, src) {
-  const letters = [
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-  ];
-
   // to loop vertically through a 2d array
   let j = 0;
   while (j < arr[0].length) {

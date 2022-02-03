@@ -1,5 +1,34 @@
 "use strict";
 
+const letters = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+];
+
 function makeButtonAlgorithm(id, functionAlgo) {
   if (id === "dijkstra") {
     const inputOrigin = document.createElement("input");
@@ -51,7 +80,12 @@ function numVertices(bAlgorithm) {
         // how to check if bAlgorithm is havel-hakimi or not, in the first case print a table 1 x n
         if (algorithm === "havel-hakimi") {
           console.log("executing... :", algorithm);
-          createTable1rowncolumns();
+          createTable1row(nVertices);
+          const pFootnote = document.createElement("p");
+          pFootnote.classList.add("pFootnote");
+          pFootnote.innerHTML = "* empty inputs are interpreted as 0 value";
+          const dataEntry = document.querySelector(".dataEntry");
+          dataEntry.append(pFootnote, bAlgorithm);
         } else {
           createAdjacencyMatrix(nVertices);
           const pFootnote = document.createElement("p");
@@ -72,27 +106,61 @@ function numVertices(bAlgorithm) {
   dataEntry.append(pSizeMatrix, inputSizeMatrix, bSizeMatrix, br);
 }
 
-function createTable1rowncolumns() {}
+function createTable1row(size, arr = []) {
+  //create table
+  const table = document.createElement("table");
+  if (arr.length !== 0) {
+    table.classList.add("result");
+  } else {
+    table.classList.add("empty");
+  }
+  const vertexs = document.createElement("tr");
+  const theaderEmpty = document.createElement("th");
+  //vertexs
+  for (let i = 0; i <= size - 1; i++) {
+    let tv = document.createElement("th");
+    tv.innerHTML = letters[i];
+    vertexs.appendChild(tv);
+  }
+  //row
+  for (let i = 0; i <= 1; i++) {
+    let th = document.createElement("th");
+    let tr = document.createElement("tr");
+    tr.appendChild(th);
+    //column
+    for (let j = 0; j <= size - 1; j++) {
+      let td = document.createElement("td");
+      let input = document.createElement("input");
+      if (arr.length !== 0) {
+        input.disabled = true;
+        if (arr[i][j] === Infinity) {
+          input.value = "∞";
+        } else {
+          input.value = arr[i][j];
+        }
+      }
+      td.appendChild(input);
+      tr.appendChild(td);
+    }
+    vertexs.insertBefore(theaderEmpty, vertexs.firstChild);
+    if (i < 1) {
+      table.appendChild(tr);
+    }
+    table.insertBefore(vertexs, table.firstChild);
+  }
+  const pTitle = document.createElement("p");
+  pTitle.innerHTML = "DEGREE SEQUENCE";
+  const dataEntry = document.querySelector(".dataEntry");
+  if (table.className === "empty") {
+    dataEntry.appendChild(pTitle);
+    dataEntry.appendChild(table);
+  } else if (table.className === "result") {
+    const solution = document.querySelector(".solution");
+    solution.appendChild(table);
+  }
+}
 
 function createAdjacencyMatrix(size, arr = []) {
-  i;
-  const letters = [
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-  ];
   //create table
   const table = document.createElement("table");
   if (arr.length !== 0) {
@@ -161,6 +229,23 @@ function readDataTable(size) {
   return newArr;
 }
 
+function readHavelHakimiTable(size) {
+  let arrayInputs = [];
+  let newArr = [];
+  const input = document.querySelectorAll("table input");
+  for (let i = 0; i < input.length; i++) {
+    if (input[i].value === "-" || input[i].value === "") {
+      arrayInputs.push(0);
+    } else {
+      arrayInputs.push(parseInt(input[i].value));
+    }
+  }
+  for (let i = 0; i < arrayInputs.length; i += size) {
+    newArr.push(arrayInputs.slice(i, i + size));
+  }
+  return newArr;
+}
+
 function deleteTemporalTable() {
   console.clear();
   const error = document.querySelector(".error");
@@ -195,7 +280,9 @@ function deleteEmptyTable() {
     const pElements = document.querySelectorAll("p");
     pElements[1].remove();
     emptyTable.remove();
-    pElements[2].remove();
+    if (pElements[2]) {
+      pElements[2].remove();
+    }
   }
   const solution = document.querySelector(".solution");
   while (solution.firstChild) {
@@ -204,7 +291,6 @@ function deleteEmptyTable() {
   const origin = document.querySelector("#origin");
   if (origin !== null) {
     origin.value = "";
-    console.log(origin);
   }
 }
 
@@ -290,6 +376,7 @@ export {
   numVertices,
   createAdjacencyMatrix,
   readDataTable,
+  readHavelHakimiTable,
   deleteTemporalTable,
   deleteResultTable,
   printError,
@@ -297,4 +384,5 @@ export {
   principalButtonsAnimation,
   secondaryButtonsAnimation,
   createStructure,
+  letters,
 };

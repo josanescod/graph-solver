@@ -5,6 +5,7 @@ import { dijkstra as dijkstra } from "./algorithms/dijkstra.js";
 import {
   numVertices as numVertices,
   readDataTable as readDataTable,
+  readHavelHakimiTable as readHavelHakimiTable,
   deleteTemporalTable as deleteTemporalTable,
   deleteResultTable as deleteResultTable,
   printError as printError,
@@ -31,10 +32,11 @@ function main() {
     const bAlgorithm = makeButtonAlgorithm(bHavelHakimi.id, function () {
       secondaryButtonsAnimation(this, "clicked");
 
-      /*deleteResultTable();
+      deleteResultTable();
       let size = parseInt(nVertices.value);
-      const matrixArray = readDataTable(size);
-      floyd(matrixArray);*/
+      const matrixArray = readHavelHakimiTable(size);
+      console.log(matrixArray);
+      /*floyd(matrixArray);*/
     });
 
     numVertices(bAlgorithm);
