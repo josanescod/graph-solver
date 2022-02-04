@@ -1,9 +1,16 @@
 "use strict";
-
+import { letters as letters } from "../utilsDOM/utilsDOM.js";
 //havel-hakimi
 function checkIsAllZero(arr) {
-  const someIsNotZero = arr.some((item) => item !== 0);
+  let isAllZero = false;
+  /*const someIsNotZero = arr.some((item) => item !== 0);
   const isAllZero = !someIsNotZero;
+  console.log(`toda la secuencia son zeros? ${isAllZero}`);*/
+  let value = arr.reduce((a, b) => a + b, 0);
+  if (value === 0 && arr.length > 0) {
+    isAllZero = true;
+  }
+  console.log(`is all zero? ${isAllZero}`);
   return isAllZero;
 }
 
@@ -21,7 +28,9 @@ function subtractOneUpToFirstParameter(firstParam, array) {
       newArray.push(array[index]);
     }
   }
-  console.log(`substractOneUpToFirstParameter: ${newArray}`);
+  console.log(
+    `substractOneUpToFirstParameter: ${newArray}, ${newArray.length}`
+  );
   return newArray;
 }
 
@@ -48,6 +57,60 @@ function normalizeArray(arr) {
       for (let j = 0; j < difference; j++) {
         arr[i].unshift("");
       }
+    }
+  }
+}
+
+function createTableHavelHakimi(vertices, arr) {
+  //create table
+  const table = document.createElement("table");
+  if (arr.length !== 0) {
+    table.classList.add("result");
+  } else {
+    table.classList.add("empty");
+  }
+  const vertexs = document.createElement("tr");
+  const theaderEmpty = document.createElement("th");
+  //vertexs
+  for (let i = 0; i <= vertices - 1; i++) {
+    let tv = document.createElement("th");
+    tv.innerHTML = letters[i];
+    vertexs.appendChild(tv);
+  }
+  //row
+  for (let i = 0; i <= arr.length - 1; i++) {
+    let th = document.createElement("th");
+    let tr = document.createElement("tr");
+    tr.appendChild(th);
+    //column
+    for (let j = 0; j <= arr[i].length - 1; j++) {
+      let td = document.createElement("td");
+      let input = document.createElement("input");
+      if (arr.length !== 0) {
+        input.disabled = true;
+        if (arr[i][j] === "") {
+          input.value = "";
+        } else {
+          input.value = arr[i][j];
+        }
+      }
+      td.appendChild(input);
+      tr.appendChild(td);
+    }
+    vertexs.insertBefore(theaderEmpty, vertexs.firstChild);
+
+    table.appendChild(tr);
+
+    table.insertBefore(vertexs, table.firstChild);
+    const pTitle = document.createElement("p");
+    pTitle.innerHTML = "DEGREE SEQUENCE";
+    const dataEntry = document.querySelector(".dataEntry");
+    if (table.className === "empty") {
+      dataEntry.appendChild(pTitle);
+      dataEntry.appendChild(table);
+    } else if (table.className === "result") {
+      const solution = document.querySelector(".solution");
+      solution.appendChild(table);
     }
   }
 }
@@ -95,6 +158,7 @@ function havelHakimi(array) {
   arrayFinal.push(tempArray);
 
   //step 4
+  //if (tempArray.includes(-1) || firstShiftedElement > tempArray.length) {
   if (tempArray.includes(-1)) {
     let lastValue = [-1];
     arrayFinal.push(lastValue);
@@ -102,17 +166,30 @@ function havelHakimi(array) {
     console.log(arrayFinal);
     console.log(`${n} times executed`);
     normalizeArray(arrayFinal);
+    const nVertices = parseInt(document.querySelector("#nVertices").value);
+    createTableHavelHakimi(nVertices, arrayFinal);
     arrayFinal = [];
     n = 0;
     return false;
   } else if (checkIsAllZero(tempArray)) {
-    console.log("toda la secuencia son zeros, SI es secuencia grafica.");
     console.log(arrayFinal);
     console.log(`${n} times executed`);
     normalizeArray(arrayFinal);
+    const nVertices = parseInt(document.querySelector("#nVertices").value);
+    createTableHavelHakimi(nVertices, arrayFinal);
     arrayFinal = [];
     n = 0;
     return true;
+  } else if (tempArray.length === 0) {
+    console.log(arrayFinal);
+    console.log(`${n} times executed`);
+    arrayFinal.pop();
+    normalizeArray(arrayFinal);
+    const nVertices = parseInt(document.querySelector("#nVertices").value);
+    createTableHavelHakimi(nVertices, arrayFinal);
+    arrayFinal = [];
+    n = 0;
+    return false;
   }
 
   tempArray = [];

@@ -2,5 +2,6 @@
 
 Solver of various graph algorithms for educational purposes.
 
-1. Floyd
-2. Dijkstra
+1. Havel-Hakimi
+2. Floyd
+3. Dijkstra
