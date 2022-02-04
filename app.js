@@ -16,6 +16,7 @@ import {
   principalButtonsAnimation as principalButtonsAnimation,
   secondaryButtonsAnimation as secondaryButtonsAnimation,
   createStructure as createStructure,
+  printMessageSolution as printMessageSolution,
 } from "../utilsDOM/utilsDOM.js";
 
 window.onload = () => {
@@ -40,9 +41,9 @@ function main() {
       let isSequence = havelHakimi(matrixArray);
       console.timeEnd("havel-hakimi");
       if (isSequence) {
-        console.log("SI que es secuencia grafica");
+        printMessageSolution("it's a graphic sequence");
       } else {
-        console.log("NO es secuencia grafica");
+        printMessageSolution("it's not a graphic sequence");
       }
     });
 

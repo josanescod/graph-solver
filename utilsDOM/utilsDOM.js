@@ -370,6 +370,13 @@ function createStructure() {
   }
 }
 
+function printMessageSolution(message) {
+  const solution = document.querySelector(".solution");
+  const msolution = document.createElement("p");
+  msolution.classList.add("mSolution");
+  msolution.innerHTML = message;
+  solution.appendChild(msolution);
+}
 export {
   makeButtonAlgorithm,
   numVertices,
@@ -383,5 +390,6 @@ export {
   principalButtonsAnimation,
   secondaryButtonsAnimation,
   createStructure,
+  printMessageSolution,
   letters,
 };
