@@ -2,7 +2,7 @@
 
 import { floyd as floyd } from "./algorithms/floyd.js";
 import { dijkstra as dijkstra } from "./algorithms/dijkstra.js";
-import { havelhakimi as havelhakimi } from "./algorithms/havelhakimi.js";
+import { havelHakimi as havelHakimi } from "./algorithms/havelHakimi.js";
 
 import {
   numVertices as numVertices,
@@ -36,7 +36,7 @@ function main() {
       deleteResultTable();
       let size = parseInt(nVertices.value);
       const matrixArray = readHavelHakimiTable(size);
-      havelhakimi(matrixArray);
+      console.log(havelHakimi(matrixArray));
     });
 
     numVertices(bAlgorithm);

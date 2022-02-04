@@ -56,7 +56,7 @@ function makeButtonAlgorithm(id, functionAlgo) {
 }
 
 function numVertices(bAlgorithm) {
-  const maxVertices = 10;
+  const maxVertices = 15;
   const pSizeMatrix = document.createElement("p");
   pSizeMatrix.innerHTML = `Insert number of vertices [2-${maxVertices}]:`;
   pSizeMatrix.classList.add("nobr");
@@ -79,7 +79,6 @@ function numVertices(bAlgorithm) {
         const algorithm = bAlgorithm.className.split(" ")[0];
         // how to check if bAlgorithm is havel-hakimi or not, in the first case print a table 1 x n
         if (algorithm === "havel-hakimi") {
-          console.log("executing... :", algorithm);
           createTable1row(nVertices);
           const pFootnote = document.createElement("p");
           pFootnote.classList.add("pFootnote");
@@ -243,7 +242,7 @@ function readHavelHakimiTable(size) {
   for (let i = 0; i < arrayInputs.length; i += size) {
     newArr.push(arrayInputs.slice(i, i + size));
   }
-  return newArr;
+  return newArr.flat();
 }
 
 function deleteTemporalTable() {
@@ -341,7 +340,7 @@ function footerData() {
 }
 
 function createStructure() {
-  const idButtons = ["floyd", "dijkstra", "havel-hakimi", "clearContent"];
+  const idButtons = ["havel-hakimi", "floyd", "dijkstra", "clearContent"];
   const sections = ["dataEntry", "solution", "footer"]; //nav
   const nav = document.createElement("nav");
   for (let id of idButtons) {
