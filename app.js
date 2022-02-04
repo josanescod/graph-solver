@@ -36,7 +36,8 @@ function main() {
       deleteResultTable();
       let size = parseInt(nVertices.value);
       const matrixArray = readHavelHakimiTable(size);
-      console.log(havelHakimi(matrixArray));
+      let isSequence = havelHakimi(matrixArray);
+      console.log(isSequence);
     });
 
     numVertices(bAlgorithm);
