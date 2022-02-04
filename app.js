@@ -36,8 +36,14 @@ function main() {
       deleteResultTable();
       let size = parseInt(nVertices.value);
       const matrixArray = readHavelHakimiTable(size);
+      console.time("havel-hakimi");
       let isSequence = havelHakimi(matrixArray);
-      console.log(isSequence);
+      console.timeEnd("havel-hakimi");
+      if (isSequence) {
+        console.log("SI que es secuencia grafica");
+      } else {
+        console.log("NO es secuencia grafica");
+      }
     });
 
     numVertices(bAlgorithm);

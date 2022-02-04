@@ -1,16 +1,13 @@
 "use strict";
 import { letters as letters } from "../utilsDOM/utilsDOM.js";
+
 //havel-hakimi
 function checkIsAllZero(arr) {
   let isAllZero = false;
-  /*const someIsNotZero = arr.some((item) => item !== 0);
-  const isAllZero = !someIsNotZero;
-  console.log(`toda la secuencia son zeros? ${isAllZero}`);*/
   let value = arr.reduce((a, b) => a + b, 0);
   if (value === 0 && arr.length > 0) {
     isAllZero = true;
   }
-  console.log(`is all zero? ${isAllZero}`);
   return isAllZero;
 }
 
@@ -28,9 +25,6 @@ function subtractOneUpToFirstParameter(firstParam, array) {
       newArray.push(array[index]);
     }
   }
-  console.log(
-    `substractOneUpToFirstParameter: ${newArray}, ${newArray.length}`
-  );
   return newArray;
 }
 
@@ -147,24 +141,15 @@ function havelHakimi(array) {
   });
 
   if (!isArrayReverseSorted(tempArray)) {
-    console.log(
-      `esta el tempArray ordenado? ${isArrayReverseSorted(
-        tempArray
-      )}: ${tempArray}`
-    );
     tempArray = sortArrayDescendingOrder(tempArray);
   }
 
   arrayFinal.push(tempArray);
 
   //step 4
-  //if (tempArray.includes(-1) || firstShiftedElement > tempArray.length) {
-  if (tempArray.includes(-1)) {
-    let lastValue = [-1];
-    arrayFinal.push(lastValue);
-    console.log(`secuencia NO grafica  ==> ${lastValue} `);
+  if (arrayFinal.length === 0 && tempArray.includes(-1)) {
     console.log(arrayFinal);
-    console.log(`${n} times executed`);
+    console.log(`number of iterations: ${n}`);
     normalizeArray(arrayFinal);
     const nVertices = parseInt(document.querySelector("#nVertices").value);
     createTableHavelHakimi(nVertices, arrayFinal);
@@ -173,7 +158,7 @@ function havelHakimi(array) {
     return false;
   } else if (checkIsAllZero(tempArray)) {
     console.log(arrayFinal);
-    console.log(`${n} times executed`);
+    console.log(`number of iterations: ${n}`);
     normalizeArray(arrayFinal);
     const nVertices = parseInt(document.querySelector("#nVertices").value);
     createTableHavelHakimi(nVertices, arrayFinal);
@@ -182,7 +167,7 @@ function havelHakimi(array) {
     return true;
   } else if (tempArray.length === 0) {
     console.log(arrayFinal);
-    console.log(`${n} times executed`);
+    console.log(`number of iterations: ${n}`);
     arrayFinal.pop();
     normalizeArray(arrayFinal);
     const nVertices = parseInt(document.querySelector("#nVertices").value);
