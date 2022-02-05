@@ -3,11 +3,17 @@ import { letters as letters } from "../utilsDOM/utilsDOM.js";
 
 //havel-hakimi
 function checkIsAllZero(arr) {
-  let isAllZero = false;
-  let value = arr.reduce((a, b) => a + b, 0);
-  if (value === 0 && arr.length > 0) {
-    isAllZero = true;
+  let isAllZero = true;
+  if (arr.length === 0) {
+    isAllZero = false;
+  } else {
+    for (let value of arr) {
+      if (value !== 0) {
+        isAllZero = false;
+      }
+    }
   }
+
   return isAllZero;
 }
 
