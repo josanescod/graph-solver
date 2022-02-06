@@ -164,6 +164,7 @@ function havelHakimi(array) {
     n = 0;
     return false;
   } else if (checkIsAllZero(tempArray)) {
+    console.log(`sortedArray: ${tempArray}`);
     console.log(arrayFinal);
     console.log(`number of iterations: ${n}`);
     normalizeArray(arrayFinal);
