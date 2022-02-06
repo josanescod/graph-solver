@@ -1,7 +1,9 @@
 "use strict";
 import { letters as letters } from "../utilsDOM/utilsDOM.js";
 
-//havel-hakimi
+let arrayFinal = [];
+let n = 0;
+
 function checkIsAllZero(arr) {
   let isAllZero = true;
   if (arr.length === 0) {
@@ -22,6 +24,7 @@ function sortArrayDescendingOrder(array) {
     return b - a;
   });
 }
+
 function subtractOneUpToFirstParameter(firstParam, array) {
   const newArray = [];
   for (var index = 0; index < array.length; index++) {
@@ -44,9 +47,6 @@ function isArrayReverseSorted(arr) {
   }
   return sorted;
 }
-
-let arrayFinal = [];
-let n = 0;
 
 function normalizeArray(arr) {
   const width = arr[0].length;
@@ -114,7 +114,8 @@ function createTableHavelHakimi(vertices, arr) {
     }
   }
 }
-//Main code
+
+//havel-hakimi
 function havelHakimi(array) {
   n++;
   let tempArray = [];
