@@ -96,6 +96,11 @@ function numVertices(bAlgorithm) {
           //tables with adjacency list
         } else if (algorithm === "dfs") {
           console.log("adjacency list");
+          //TEST
+
+          const dataEntry = document.querySelector(".dataEntry");
+
+          dataEntry.append(bAlgorithm);
         }
       }
     } else {

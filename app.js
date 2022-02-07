@@ -3,7 +3,8 @@
 import { floyd as floyd } from "./algorithms/floyd.js";
 import { dijkstra as dijkstra } from "./algorithms/dijkstra.js";
 import { havelHakimi as havelHakimi } from "./algorithms/havelHakimi.js";
-
+import { dfs as dfs } from "./algorithms/dfs.js";
+import { Graph as Graph } from "./utils/graph.js";
 import {
   numVertices as numVertices,
   readDataTableMatrix as readDataTableMatrix,
@@ -112,9 +113,19 @@ function main() {
       deleteResultTable();
       let size = parseInt(nVertices.value);
       console.log(size);
-      // table adjacency list
+      // Using the above implemented graph class
+      var g = new Graph(6);
+      var vertices = [1, 2, 3, 4, 5, 6, 7];
+      // adding vertices
+      for (var i = 0; i < vertices.length; i++) {
+        g.addVertex(vertices[i]);
+      }
+      g.addEdge(1, 2);
+      g.addEdge(2, 3);
+      console.log(g);
+      // table adjacency list DOM
 
-      // readAdjacencyList(size)
+      // readAdjacencyList(size) DOM and inside DOM graph class?
       /*const adjacencyListArray = readAdjacencyList(size);
       dfs(adjacencyListArray);*/
     });
