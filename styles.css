@@ -96,6 +96,10 @@ input:disabled {
   text-transform: capitalize;
 }
 
+.uppercase {
+  text-transform: uppercase;
+}
+
 .footerText {
   color: #aaa;
   font-size: 12px;

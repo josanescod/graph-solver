@@ -74,7 +74,6 @@ function numVertices(bAlgorithm) {
     if (nVertices > 1 && nVertices <= maxVertices && nVertices.length > 0) {
       deleteError();
       deleteEmptyTable();
-
       if (!document.querySelector(".empty")) {
         const algorithm = bAlgorithm.className.split(" ")[0];
         // how to check if bAlgorithm is havel-hakimi or not, in the first case print a table 1 x n
@@ -85,7 +84,7 @@ function numVertices(bAlgorithm) {
           pFootnote.innerHTML = "* empty inputs are interpreted as 0 value";
           const dataEntry = document.querySelector(".dataEntry");
           dataEntry.append(pFootnote, bAlgorithm);
-        } else {
+        } else if (algorithm === "floyd" || algorithm === "dijkstra") {
           createAdjacencyMatrix(nVertices);
           const pFootnote = document.createElement("p");
           pFootnote.classList.add("pFootnote");
@@ -94,6 +93,9 @@ function numVertices(bAlgorithm) {
           const dataEntry = document.querySelector(".dataEntry");
 
           dataEntry.append(pFootnote, bAlgorithm);
+          //tables with adjacency list
+        } else if (algorithm === "dfs") {
+          console.log("adjacency list");
         }
       }
     } else {
@@ -211,7 +213,7 @@ function createAdjacencyMatrix(size, arr = []) {
   }
 }
 
-function readDataTable(size) {
+function readDataTableMatrix(size) {
   let arrayInputs = [];
   let newArr = [];
   const input = document.querySelectorAll("table input");
@@ -340,7 +342,13 @@ function footerData() {
 }
 
 function createStructure() {
-  const idButtons = ["havel-hakimi", "floyd", "dijkstra", "clearContent"];
+  const idButtons = [
+    "havel-hakimi",
+    "floyd",
+    "dijkstra",
+    "dfs",
+    "clearContent",
+  ];
   const sections = ["dataEntry", "solution", "footer"]; //nav
   const nav = document.createElement("nav");
   for (let id of idButtons) {
@@ -350,7 +358,12 @@ function createStructure() {
       id = "clear";
     }
     newButton.innerText = id;
-    newButton.classList.add("capitalize");
+
+    if (newButton.id === "dfs") {
+      newButton.classList.add("uppercase");
+    } else {
+      newButton.classList.add("capitalize");
+    }
     nav.appendChild(newButton);
   }
   document.body.appendChild(nav);
@@ -381,7 +394,7 @@ export {
   makeButtonAlgorithm,
   numVertices,
   createAdjacencyMatrix,
-  readDataTable,
+  readDataTableMatrix,
   readHavelHakimiTable,
   deleteTemporalTable,
   deleteResultTable,

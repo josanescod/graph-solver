@@ -1,5 +1,5 @@
 "use strict";
-import { createAdjacencyMatrix as createAdjacencyMatrix } from "../utilsDOM/utilsDOM.js";
+import { createAdjacencyMatrix as createAdjacencyMatrix } from "../utils/utilsDOM.js";
 
 //floyd https://www.geeksforgeeks.org/floyd-warshall-algorithm-dp-16/
 function floyd(arr) {

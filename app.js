@@ -6,7 +6,7 @@ import { havelHakimi as havelHakimi } from "./algorithms/havelHakimi.js";
 
 import {
   numVertices as numVertices,
-  readDataTable as readDataTable,
+  readDataTableMatrix as readDataTableMatrix,
   readHavelHakimiTable as readHavelHakimiTable,
   deleteTemporalTable as deleteTemporalTable,
   deleteResultTable as deleteResultTable,
@@ -17,7 +17,7 @@ import {
   secondaryButtonsAnimation as secondaryButtonsAnimation,
   createStructure as createStructure,
   printMessageSolution as printMessageSolution,
-} from "../utilsDOM/utilsDOM.js";
+} from "../utils/utilsDOM.js";
 
 window.onload = () => {
   main();
@@ -31,14 +31,13 @@ function main() {
     deleteTemporalTable();
     console.log("havel-hakimi");
     principalButtonsAnimation(this);
-
     const bAlgorithm = makeButtonAlgorithm(bHavelHakimi.id, function () {
       secondaryButtonsAnimation(this, "clicked");
       deleteResultTable();
       let size = parseInt(nVertices.value);
-      const matrixArray = readHavelHakimiTable(size);
+      const degreeSequenceArray = readHavelHakimiTable(size);
       console.time("havel-hakimi");
-      let isSequence = havelHakimi(matrixArray);
+      let isSequence = havelHakimi(degreeSequenceArray);
       console.timeEnd("havel-hakimi");
       if (isSequence) {
         printMessageSolution("it's a graphic sequence");
@@ -59,8 +58,8 @@ function main() {
       secondaryButtonsAnimation(this, "clicked");
       deleteResultTable();
       let size = parseInt(nVertices.value);
-      const matrixArray = readDataTable(size);
-      floyd(matrixArray);
+      const adjacencyMatrixArray = readDataTableMatrix(size);
+      floyd(adjacencyMatrixArray);
     });
 
     numVertices(bAlgorithm);
@@ -76,7 +75,7 @@ function main() {
         secondaryButtonsAnimation(this, "clicked");
         deleteResultTable();
         let size = parseInt(nVertices.value);
-        const matrixArray = readDataTable(size);
+        const adjacencyMatrixArray = readDataTableMatrix(size);
         //select th vertices, add on array, delete first element,send index of array like origin
         const trvertices = document
           .querySelector("table tr ")
@@ -88,7 +87,7 @@ function main() {
         let origin = document.querySelector("#origin").value.toUpperCase();
         if (vertices.indexOf(origin) !== -1) {
           deleteError();
-          dijkstra(matrixArray, vertices.indexOf(origin));
+          dijkstra(adjacencyMatrixArray, vertices.indexOf(origin));
         } else {
           printError(
             `Please enter a valid source vertex [${vertices[0]}-${
@@ -99,6 +98,28 @@ function main() {
       });
       numVertices(bAlgorithm);
     }
+  });
+
+  //dfs
+  const bDfs = document.querySelector("#dfs");
+  bDfs.addEventListener("click", function () {
+    deleteTemporalTable();
+    console.log("dfs");
+    principalButtonsAnimation(this);
+
+    const bAlgorithm = makeButtonAlgorithm(bDfs.id, function () {
+      secondaryButtonsAnimation(this, "clicked");
+      deleteResultTable();
+      let size = parseInt(nVertices.value);
+      console.log(size);
+      // table adjacency list
+
+      // readAdjacencyList(size)
+      /*const adjacencyListArray = readAdjacencyList(size);
+      dfs(adjacencyListArray);*/
+    });
+
+    numVertices(bAlgorithm);
   });
 
   const clearContent = document.querySelector("#clearContent");

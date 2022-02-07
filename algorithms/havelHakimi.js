@@ -1,5 +1,5 @@
 "use strict";
-import { letters as letters } from "../utilsDOM/utilsDOM.js";
+import { letters as letters } from "../utils/utilsDOM.js";
 
 let arrayFinal = [];
 let n = 0;

@@ -1,6 +1,6 @@
 "use strict";
 
-import { letters as letters } from "../utilsDOM/utilsDOM.js";
+import { letters as letters } from "../utils/utilsDOM.js";
 
 function minDistance(dist, sptSet, numbVertices) {
   let min = Infinity;
