@@ -112,9 +112,10 @@ function main() {
       secondaryButtonsAnimation(this, "clicked");
       deleteResultTable();
       let size = parseInt(nVertices.value);
-      console.log(size);
+      //const AdjacencyListArray = readDataTableAdjList(size);
+
       // Using the above implemented graph class
-      var g = new Graph(6);
+      /*var g = new Graph(6);
       var vertices = [1, 2, 3, 4, 5, 6, 7];
       // adding vertices
       for (var i = 0; i < vertices.length; i++) {
@@ -122,11 +123,28 @@ function main() {
       }
       g.addEdge(1, 2);
       g.addEdge(2, 3);
-      console.log(g);
-
+      console.log(g);*/
       // readAdjacencyList(size) DOM and inside DOM graph class?
-      /*const adjacencyListArray = readAdjacencyList(size);
+      let origin = document.querySelector("#origin").value.toUpperCase();
+      const trvertices = document.querySelectorAll("table th ");
+      const vertices = [];
+      for (let i = 0; i < trvertices.length; i++) {
+        vertices.push(trvertices[i].innerText);
+      }
+
+      if (vertices.indexOf(origin) !== -1) {
+        deleteError();
+        console.log(`vertice origen ${origin}`);
+        /*const adjacencyListArray = readAdjacencyList(size);
       dfs(adjacencyListArray);*/
+        //dijkstra(adjacencyMatrixArray, vertices.indexOf(origin));
+      } else {
+        printError(
+          `Please enter a valid source vertex [${vertices[0]}-${
+            vertices[vertices.length - 1]
+          }]`
+        );
+      }
     });
 
     numVertices(bAlgorithm);

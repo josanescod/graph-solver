@@ -113,6 +113,12 @@ input:disabled {
   color: #aaaaaa;
 }
 
+.picked {
+  color: black;
+  /*border: 2px solid black;*/
+  box-shadow: none;
+}
+
 .secondary,
 #sizeButton {
   margin-left: 5px;

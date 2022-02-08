@@ -30,7 +30,7 @@ const letters = [
 ];
 
 function makeButtonAlgorithm(id, functionAlgo) {
-  if (id === "dijkstra") {
+  if (id === "dijkstra" || id === "dfs") {
     const inputOrigin = document.createElement("input");
     inputOrigin.id = "origin";
     const pOrigin = document.createElement("p");
@@ -41,7 +41,7 @@ function makeButtonAlgorithm(id, functionAlgo) {
     bAlgo.classList.add(`${id}`, "secondary");
     bAlgo.addEventListener("click", functionAlgo);
     const divOrigin = document.createElement("div");
-    divOrigin.classList.add("dijkstra");
+    divOrigin.classList.add(`${id}`);
     divOrigin.appendChild(pOrigin);
     divOrigin.appendChild(inputOrigin);
     divOrigin.appendChild(bAlgo);
@@ -91,16 +91,16 @@ function numVertices(bAlgorithm) {
           pFootnote.innerHTML =
             "* empty inputs are interpreted as infinite value or no connection";
           const dataEntry = document.querySelector(".dataEntry");
-
           dataEntry.append(pFootnote, bAlgorithm);
           //tables with adjacency list
         } else if (algorithm === "dfs") {
-          console.log("adjacency list");
-          //TEST
-          // table adjacency list DOM
           createAdjacencyList(nVertices);
+          const pFootnote = document.createElement("p");
+          pFootnote.classList.add("pFootnote");
+          pFootnote.innerHTML =
+            "* select the connection between the different vertices";
           const dataEntry = document.querySelector(".dataEntry");
-          dataEntry.append(bAlgorithm);
+          dataEntry.append(pFootnote, bAlgorithm);
         }
       }
     } else {
@@ -289,6 +289,10 @@ function createAdjacencyList(size) {
         badjList.innerText = vertexsArray[i][j];
         badjList.addEventListener("click", function () {
           console.log(this.innerText);
+
+          this.classList.contains("picked")
+            ? this.classList.remove("picked")
+            : this.classList.add("picked");
         });
         if (j !== size) {
           let p = document.createElement("p");
@@ -330,6 +334,11 @@ function readDataTableMatrix(size) {
     newArr.push(arrayInputs.slice(i, i + size));
   }
   return newArr;
+}
+
+function readDataTableAdjList(size) {
+  //recorrer tabla meter subArrays con los valores ij donde el boton
+  //tenga la clase selected
 }
 
 function readHavelHakimiTable(size) {
@@ -380,12 +389,11 @@ function deleteResultTable() {
 function deleteEmptyTable() {
   const emptyTable = document.querySelector(".empty");
   if (emptyTable !== null) {
-    const pElements = document.querySelectorAll("p");
-    pElements[1].remove();
-    emptyTable.remove();
-    if (pElements[2]) {
-      pElements[2].remove();
+    const br = document.querySelector("br");
+    for (let i = 0; i <= 3; i++) {
+      br.nextElementSibling.remove();
     }
+    emptyTable.remove();
   }
   const solution = document.querySelector(".solution");
   while (solution.firstChild) {
