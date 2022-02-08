@@ -108,6 +108,11 @@ input:disabled {
   border-top: 1px solid #ddd;
 }
 
+.badjList {
+  background-color: white;
+  color: #aaaaaa;
+}
+
 .secondary,
 #sizeButton {
   margin-left: 5px;
