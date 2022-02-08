@@ -78,7 +78,7 @@ function numVertices(bAlgorithm) {
         const algorithm = bAlgorithm.className.split(" ")[0];
         // how to check if bAlgorithm is havel-hakimi or not, in the first case print a table 1 x n
         if (algorithm === "havel-hakimi") {
-          createTable1row(nVertices);
+          createTableInputHavelHakimi(nVertices);
           const pFootnote = document.createElement("p");
           pFootnote.classList.add("pFootnote");
           pFootnote.innerHTML = "* empty inputs are interpreted as 0 value";
@@ -97,9 +97,9 @@ function numVertices(bAlgorithm) {
         } else if (algorithm === "dfs") {
           console.log("adjacency list");
           //TEST
-
+          // table adjacency list DOM
+          createAdjacencyList(nVertices);
           const dataEntry = document.querySelector(".dataEntry");
-
           dataEntry.append(bAlgorithm);
         }
       }
@@ -112,14 +112,10 @@ function numVertices(bAlgorithm) {
   dataEntry.append(pSizeMatrix, inputSizeMatrix, bSizeMatrix, br);
 }
 
-function createTable1row(size, arr = []) {
+function createTableInputHavelHakimi(size) {
   //create table
   const table = document.createElement("table");
-  if (arr.length !== 0) {
-    table.classList.add("result");
-  } else {
-    table.classList.add("empty");
-  }
+  table.classList.add("empty");
   const vertexs = document.createElement("tr");
   const theaderEmpty = document.createElement("th");
   //vertexs
@@ -137,14 +133,6 @@ function createTable1row(size, arr = []) {
     for (let j = 0; j <= size - 1; j++) {
       let td = document.createElement("td");
       let input = document.createElement("input");
-      if (arr.length !== 0) {
-        input.disabled = true;
-        if (arr[i][j] === Infinity) {
-          input.value = "∞";
-        } else {
-          input.value = arr[i][j];
-        }
-      }
       td.appendChild(input);
       tr.appendChild(td);
     }
@@ -160,7 +148,46 @@ function createTable1row(size, arr = []) {
   if (table.className === "empty") {
     dataEntry.appendChild(pTitle);
     dataEntry.appendChild(table);
-  } else if (table.className === "result") {
+  } /*else if (table.className === "result") {
+    const solution = document.querySelector(".solution");
+    solution.appendChild(table);
+  }*/
+}
+function createTableResultHavelHakimi(vertices, arr) {
+  //create table
+  const table = document.createElement("table");
+  table.classList.add("result");
+  const vertexs = document.createElement("tr");
+  const theaderEmpty = document.createElement("th");
+  //vertexs
+  for (let i = 0; i <= vertices - 1; i++) {
+    let tv = document.createElement("th");
+    tv.innerHTML = letters[i];
+    vertexs.appendChild(tv);
+  }
+  //row
+  for (let i = 0; i <= arr.length - 1; i++) {
+    let th = document.createElement("th");
+    let tr = document.createElement("tr");
+    tr.appendChild(th);
+    //column
+    for (let j = 0; j <= arr[i].length - 1; j++) {
+      let td = document.createElement("td");
+      let input = document.createElement("input");
+      if (arr.length !== 0) {
+        input.disabled = true;
+        if (arr[i][j] === "") {
+          input.value = "";
+        } else {
+          input.value = arr[i][j];
+        }
+      }
+      td.appendChild(input);
+      tr.appendChild(td);
+    }
+    vertexs.insertBefore(theaderEmpty, vertexs.firstChild);
+    table.appendChild(tr);
+    table.insertBefore(vertexs, table.firstChild);
     const solution = document.querySelector(".solution");
     solution.appendChild(table);
   }
@@ -216,6 +243,37 @@ function createAdjacencyMatrix(size, arr = []) {
     const solution = document.querySelector(".solution");
     solution.appendChild(table);
   }
+}
+
+//sort adjacencyListVertexs
+function sortAdjacencyListVertexs(arr) {
+  const finalArray = [];
+  let rowArray = [];
+  let newFirstLetter = 0;
+  let newRang = 0;
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = newFirstLetter; j < arr.length; j++) {
+      rowArray.push(arr[j]);
+    }
+    newRang = arr.length - (arr.length - newFirstLetter);
+    for (let z = 0; z < newRang; z++) {
+      rowArray.push(arr[z]);
+    }
+    let temp = rowArray.splice(1, rowArray.length);
+    temp.sort();
+    rowArray = rowArray.concat(temp);
+    finalArray.push(rowArray);
+    newFirstLetter++;
+    rowArray = [];
+  }
+  return finalArray;
+}
+
+function createAdjacencyList(size) {
+  const vertexs = letters.slice(0, size);
+  const vertexsArray = sortAdjacencyListVertexs(vertexs);
+  const table = document.createElement("table");
+  table.classList.add("empty");
 }
 
 function readDataTableMatrix(size) {
@@ -410,4 +468,5 @@ export {
   createStructure,
   printMessageSolution,
   letters,
+  createTableResultHavelHakimi,
 };

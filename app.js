@@ -123,7 +123,6 @@ function main() {
       g.addEdge(1, 2);
       g.addEdge(2, 3);
       console.log(g);
-      // table adjacency list DOM
 
       // readAdjacencyList(size) DOM and inside DOM graph class?
       /*const adjacencyListArray = readAdjacencyList(size);

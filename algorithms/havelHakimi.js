@@ -1,5 +1,5 @@
 "use strict";
-import { letters as letters } from "../utils/utilsDOM.js";
+import { createTableResultHavelHakimi as createTableResultHavelHakimi } from "../utils/utilsDOM.js";
 
 let arrayFinal = [];
 let n = 0;
@@ -27,7 +27,7 @@ function sortArrayDescendingOrder(array) {
 
 function subtractOneUpToFirstParameter(firstParam, array) {
   const newArray = [];
-  for (var index = 0; index < array.length; index++) {
+  for (let index = 0; index < array.length; index++) {
     if (index < firstParam) {
       newArray.push(array[index] - 1);
     } else {
@@ -61,67 +61,13 @@ function normalizeArray(arr) {
   }
 }
 
-function createTableHavelHakimi(vertices, arr) {
-  //create table
-  const table = document.createElement("table");
-  if (arr.length !== 0) {
-    table.classList.add("result");
-  } else {
-    table.classList.add("empty");
-  }
-  const vertexs = document.createElement("tr");
-  const theaderEmpty = document.createElement("th");
-  //vertexs
-  for (let i = 0; i <= vertices - 1; i++) {
-    let tv = document.createElement("th");
-    tv.innerHTML = letters[i];
-    vertexs.appendChild(tv);
-  }
-  //row
-  for (let i = 0; i <= arr.length - 1; i++) {
-    let th = document.createElement("th");
-    let tr = document.createElement("tr");
-    tr.appendChild(th);
-    //column
-    for (let j = 0; j <= arr[i].length - 1; j++) {
-      let td = document.createElement("td");
-      let input = document.createElement("input");
-      if (arr.length !== 0) {
-        input.disabled = true;
-        if (arr[i][j] === "") {
-          input.value = "";
-        } else {
-          input.value = arr[i][j];
-        }
-      }
-      td.appendChild(input);
-      tr.appendChild(td);
-    }
-    vertexs.insertBefore(theaderEmpty, vertexs.firstChild);
-
-    table.appendChild(tr);
-
-    table.insertBefore(vertexs, table.firstChild);
-    const pTitle = document.createElement("p");
-    pTitle.innerHTML = "DEGREE SEQUENCE";
-    const dataEntry = document.querySelector(".dataEntry");
-    if (table.className === "empty") {
-      dataEntry.appendChild(pTitle);
-      dataEntry.appendChild(table);
-    } else if (table.className === "result") {
-      const solution = document.querySelector(".solution");
-      solution.appendChild(table);
-    }
-  }
-}
-
 //havel-hakimi
 function havelHakimi(array) {
   n++;
   let tempArray = [];
 
   //step 1
-  var sortedArray = sortArrayDescendingOrder(array);
+  let sortedArray = sortArrayDescendingOrder(array);
 
   if (n === 1) {
     sortedArray.forEach((element) => {
@@ -134,11 +80,9 @@ function havelHakimi(array) {
   console.log(`sortedArray: ${sortedArray}`);
 
   //step 2
-  var firstShiftedElement = sortedArray.shift();
-  //console.log(`firstShiftedElement: ${firstShiftedElement}`);
-
+  let firstShiftedElement = sortedArray.shift();
   //step 3
-  var subtractedArray = subtractOneUpToFirstParameter(
+  let subtractedArray = subtractOneUpToFirstParameter(
     firstShiftedElement,
     sortedArray
   );
@@ -159,7 +103,7 @@ function havelHakimi(array) {
     console.log(`number of iterations: ${n}`);
     normalizeArray(arrayFinal);
     const nVertices = parseInt(document.querySelector("#nVertices").value);
-    createTableHavelHakimi(nVertices, arrayFinal);
+    createTableResultHavelHakimi(nVertices, arrayFinal);
     arrayFinal = [];
     n = 0;
     return false;
@@ -169,7 +113,7 @@ function havelHakimi(array) {
     console.log(`number of iterations: ${n}`);
     normalizeArray(arrayFinal);
     const nVertices = parseInt(document.querySelector("#nVertices").value);
-    createTableHavelHakimi(nVertices, arrayFinal);
+    createTableResultHavelHakimi(nVertices, arrayFinal);
     arrayFinal = [];
     n = 0;
     return true;
@@ -179,7 +123,7 @@ function havelHakimi(array) {
     arrayFinal.pop();
     normalizeArray(arrayFinal);
     const nVertices = parseInt(document.querySelector("#nVertices").value);
-    createTableHavelHakimi(nVertices, arrayFinal);
+    createTableResultHavelHakimi(nVertices, arrayFinal);
     arrayFinal = [];
     n = 0;
     return false;
