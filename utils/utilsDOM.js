@@ -104,6 +104,7 @@ function numVertices(bAlgorithm) {
         }
       }
     } else {
+      deleteError();
       printError(`Please insert a valid number of vertices [2-${maxVertices}]`);
     }
   });
@@ -275,7 +276,6 @@ function createAdjacencyList(size) {
   const vertexsArray = sortAdjacencyListVertexs(selectedVertexs);
   const table = document.createElement("table");
   table.classList.add("empty");
-
   for (let i = 0; i <= size - 1; i++) {
     let tr = document.createElement("tr");
     //column
@@ -288,8 +288,6 @@ function createAdjacencyList(size) {
         badjList.classList.add("badjList");
         badjList.innerText = vertexsArray[i][j];
         badjList.addEventListener("click", function () {
-          console.log(this.innerText);
-
           this.classList.contains("picked")
             ? this.classList.remove("picked")
             : this.classList.add("picked");
@@ -337,8 +335,21 @@ function readDataTableMatrix(size) {
 }
 
 function readDataTableAdjList(size) {
-  //recorrer tabla meter subArrays con los valores ij donde el boton
-  //tenga la clase selected
+  const trs = document.querySelectorAll("table tr");
+  const adjList = new Map();
+  for (let i = 0; i < size; i++) {
+    adjList.set(letters[i], []);
+  }
+  for (let i = 0; i < trs.length; i++) {
+    let buttonsRow = trs[i].querySelectorAll("td button");
+    for (let j = 0; j < buttonsRow.length; j++) {
+      //
+      if (buttonsRow[j].classList.contains("picked")) {
+        adjList.get(letters[i]).push(buttonsRow[j].innerHTML);
+      }
+    }
+  }
+  return adjList;
 }
 
 function readHavelHakimiTable(size) {
@@ -505,6 +516,7 @@ export {
   numVertices,
   createAdjacencyMatrix,
   readDataTableMatrix,
+  readDataTableAdjList,
   readHavelHakimiTable,
   deleteTemporalTable,
   deleteResultTable,

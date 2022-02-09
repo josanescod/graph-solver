@@ -8,6 +8,7 @@ import { Graph as Graph } from "./utils/graph.js";
 import {
   numVertices as numVertices,
   readDataTableMatrix as readDataTableMatrix,
+  readDataTableAdjList as readDataTableAdjList,
   readHavelHakimiTable as readHavelHakimiTable,
   deleteTemporalTable as deleteTemporalTable,
   deleteResultTable as deleteResultTable,
@@ -107,37 +108,25 @@ function main() {
     deleteTemporalTable();
     console.log("dfs");
     principalButtonsAnimation(this);
-
     const bAlgorithm = makeButtonAlgorithm(bDfs.id, function () {
       secondaryButtonsAnimation(this, "clicked");
       deleteResultTable();
       let size = parseInt(nVertices.value);
-      //const AdjacencyListArray = readDataTableAdjList(size);
-
+      const AdjacencyListMap = readDataTableAdjList(size);
       // Using the above implemented graph class
-      /*var g = new Graph(6);
-      var vertices = [1, 2, 3, 4, 5, 6, 7];
-      // adding vertices
-      for (var i = 0; i < vertices.length; i++) {
-        g.addVertex(vertices[i]);
-      }
-      g.addEdge(1, 2);
-      g.addEdge(2, 3);
-      console.log(g);*/
-      // readAdjacencyList(size) DOM and inside DOM graph class?
+      const g = new Graph(size);
+      g.addadjList(AdjacencyListMap);
+      g.printGraph();
       let origin = document.querySelector("#origin").value.toUpperCase();
       const trvertices = document.querySelectorAll("table th ");
       const vertices = [];
       for (let i = 0; i < trvertices.length; i++) {
         vertices.push(trvertices[i].innerText);
       }
-
       if (vertices.indexOf(origin) !== -1) {
         deleteError();
         console.log(`vertice origen ${origin}`);
-        /*const adjacencyListArray = readAdjacencyList(size);
-      dfs(adjacencyListArray);*/
-        //dijkstra(adjacencyMatrixArray, vertices.indexOf(origin));
+        console.log(dfs(origin, g));
       } else {
         printError(
           `Please enter a valid source vertex [${vertices[0]}-${

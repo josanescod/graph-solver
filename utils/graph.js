@@ -18,16 +18,17 @@ class Graph {
     this.adjList.get(w).push(v);
   }
 
+  addadjList(map) {
+    this.adjList = map;
+  }
   //print the vertex and adjacency list
   printGraph() {
     //get all the vertices
     const get_keys = this.adjList.keys();
-
     //iterate over the vertices
     for (let i of get_keys) {
       let get_values = this.adjList.get(i);
       let conc = "";
-
       //iterate over the adjacency list concatenate the values into a string
       for (let j of get_values) {
         conc += j + " ";
