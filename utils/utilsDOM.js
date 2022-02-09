@@ -98,7 +98,7 @@ function numVertices(bAlgorithm) {
           const pFootnote = document.createElement("p");
           pFootnote.classList.add("pFootnote");
           pFootnote.innerHTML =
-            "* select the connection between the different vertices";
+            "* select the connection between the different vertices.";
           const dataEntry = document.querySelector(".dataEntry");
           dataEntry.append(pFootnote, bAlgorithm);
         }
@@ -291,6 +291,21 @@ function createAdjacencyList(size) {
           this.classList.contains("picked")
             ? this.classList.remove("picked")
             : this.classList.add("picked");
+          let parent = this.parentElement.parentElement.firstChild.innerHTML;
+          let rows = document.querySelectorAll("tr ");
+          for (let i = 0; i < rows.length; i++) {
+            let rowTh = rows[i].querySelector("th");
+            if (rowTh.innerHTML === this.innerHTML) {
+              let buttonsInARow = rows[i].querySelectorAll("td button");
+              buttonsInARow.forEach((b) => {
+                if (b.innerHTML === parent) {
+                  b.classList.contains("picked")
+                    ? b.classList.remove("picked")
+                    : b.classList.add("picked");
+                }
+              });
+            }
+          }
         });
         if (j !== size) {
           let p = document.createElement("p");
@@ -299,12 +314,10 @@ function createAdjacencyList(size) {
           td.appendChild(badjList);
           td.appendChild(p);
         }
-
         td.appendChild(badjList);
       } else {
         td.innerHTML = vertexsArray[i][j];
       }
-
       tr.appendChild(td);
     }
     table.appendChild(tr);

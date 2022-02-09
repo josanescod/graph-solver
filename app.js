@@ -125,7 +125,7 @@ function main() {
       }
       if (vertices.indexOf(origin) !== -1) {
         deleteError();
-        console.log(`vertice origen ${origin}`);
+        console.log(`source vertex ${origin}`);
         console.log(dfs(origin, g));
       } else {
         printError(
