@@ -195,6 +195,94 @@ function createTableResultHavelHakimi(vertices, arr) {
   }
 }
 
+function createTableDijkstra(arr, src) {
+  // to loop vertically through a 2d array
+  let j = 0;
+  while (j < arr[0].length) {
+    for (let i = 0; i < arr.length; i++) {
+      if (i !== 0) {
+        if (j === src) {
+          arr[i][j][1] = src;
+        } else if (arr[i][j][1] === 0) {
+          arr[i][j][1] = arr[i - 1][j][1];
+        }
+      } else {
+        arr[i][j][1] = src;
+      }
+    }
+    j++;
+  }
+
+  let z = 0;
+  // change numbers for letters
+  while (z < arr[0].length) {
+    for (let i = 0; i < arr.length; i++) {
+      arr[i][z][1] = letters[arr[i][z][1]];
+    }
+    z++;
+  }
+  //create table
+  const table = document.createElement("table");
+  if (arr.length !== 0) {
+    table.classList.add("result");
+  } else {
+    table.classList.add("empty");
+  }
+  const vertexs = document.createElement("tr");
+  const theaderEmpty = document.createElement("th");
+
+  //row
+  for (let i = 0; i <= arr.length - 1; i++) {
+    let th = document.createElement("th");
+    th.innerHTML = " ";
+    let tv = document.createElement("th");
+    tv.innerHTML = letters[i];
+    vertexs.appendChild(tv);
+
+    let tr = document.createElement("tr");
+    tr.appendChild(th);
+    //column
+    for (let j = 0; j <= arr[i].length - 1; j++) {
+      let td = document.createElement("td");
+      let input = document.createElement("input");
+      if (arr.length !== 0) {
+        input.disabled = true;
+        input.setAttribute("type", "text");
+        if (arr[i][j][0] === "Infinity") {
+          input.value = `∞,${arr[i][j][1]}`;
+        } else {
+          input.value = `${arr[i][j][0]},${arr[i][j][1]}`;
+        }
+      }
+      td.appendChild(input);
+      tr.appendChild(td);
+    }
+    vertexs.insertBefore(theaderEmpty, vertexs.firstChild);
+    table.appendChild(tr);
+    table.insertBefore(vertexs, table.firstChild);
+  }
+
+  const dataEntry = document.querySelector(".dataEntry");
+  if (table.className === "empty") {
+    dataEntry.appendChild(table);
+  } else if (table.className === "result") {
+    const solution = document.querySelector(".solution");
+    solution.appendChild(table);
+  }
+  // A B C D ....
+  // create new Row with letters and put firstElement table 'result'
+  let tableResult = document.querySelector("table.result");
+  let trTableResult = tableResult.firstChild;
+  let thArrayTrTableReslult = trTableResult.querySelectorAll("th");
+  for (let i = 0; i <= arr.length; i++) {
+    thArrayTrTableReslult[i].innerHTML = letters[i];
+  }
+
+  const newTh = document.createElement("th");
+  newTh.innerHTML = " ";
+  trTableResult.insertBefore(newTh, trTableResult.firstChild);
+}
+
 function createAdjacencyMatrix(size, arr = []) {
   //create table
   const table = document.createElement("table");
@@ -527,6 +615,7 @@ function printMessageSolution(message) {
 export {
   makeButtonAlgorithm,
   numVertices,
+  createTableDijkstra,
   createAdjacencyMatrix,
   readDataTableMatrix,
   readDataTableAdjList,
