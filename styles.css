@@ -59,7 +59,8 @@ input:disabled {
 }
 
 .empty,
-.result {
+.result,
+.resultDijkstra {
   margin: 0 auto;
 }
 
@@ -117,6 +118,15 @@ input:disabled {
   color: black;
   /*border: 2px solid black;*/
   box-shadow: none;
+}
+
+.boption {
+  background-color: white;
+  color: black;
+  font-size: 10px;
+  margin-left: 10px;
+  font-weight: 300;
+  padding: 0;
 }
 
 .secondary,

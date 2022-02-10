@@ -118,6 +118,8 @@ function createTableInputHavelHakimi(size) {
   const table = document.createElement("table");
   table.classList.add("empty");
   const vertexs = document.createElement("tr");
+  vertexs.classList.add("hvertices");
+
   const theaderEmpty = document.createElement("th");
   //vertexs
   for (let i = 0; i <= size - 1; i++) {
@@ -145,14 +147,13 @@ function createTableInputHavelHakimi(size) {
   }
   const pTitle = document.createElement("p");
   pTitle.innerHTML = "DEGREE SEQUENCE";
+  const bLettNumb = createButtonLettToNumb();
+  pTitle.appendChild(bLettNumb);
+
   const dataEntry = document.querySelector(".dataEntry");
   if (table.className === "empty") {
-    dataEntry.appendChild(pTitle);
-    dataEntry.appendChild(table);
-  } /*else if (table.className === "result") {
-    const solution = document.querySelector(".solution");
-    solution.appendChild(table);
-  }*/
+    dataEntry.append(pTitle, table);
+  }
 }
 
 function createTableResultHavelHakimi(vertices, arr) {
@@ -160,6 +161,7 @@ function createTableResultHavelHakimi(vertices, arr) {
   const table = document.createElement("table");
   table.classList.add("result");
   const vertexs = document.createElement("tr");
+  vertexs.classList.add("hvertices");
   const theaderEmpty = document.createElement("th");
   //vertexs
   for (let i = 0; i <= vertices - 1; i++) {
@@ -192,6 +194,7 @@ function createTableResultHavelHakimi(vertices, arr) {
     table.insertBefore(vertexs, table.firstChild);
     const solution = document.querySelector(".solution");
     solution.appendChild(table);
+    changeNameOfVertices();
   }
 }
 
@@ -224,11 +227,12 @@ function createTableDijkstra(arr, src) {
   //create table
   const table = document.createElement("table");
   if (arr.length !== 0) {
-    table.classList.add("result");
+    table.classList.add("resultDijkstra");
   } else {
     table.classList.add("empty");
   }
   const vertexs = document.createElement("tr");
+  vertexs.classList.add("hvertices");
   const theaderEmpty = document.createElement("th");
 
   //row
@@ -265,13 +269,13 @@ function createTableDijkstra(arr, src) {
   const dataEntry = document.querySelector(".dataEntry");
   if (table.className === "empty") {
     dataEntry.appendChild(table);
-  } else if (table.className === "result") {
+  } else if (table.className === "resultDijkstra") {
     const solution = document.querySelector(".solution");
     solution.appendChild(table);
   }
   // A B C D ....
   // create new Row with letters and put firstElement table 'result'
-  let tableResult = document.querySelector("table.result");
+  let tableResult = document.querySelector("table.resultDijkstra");
   let trTableResult = tableResult.firstChild;
   let thArrayTrTableReslult = trTableResult.querySelectorAll("th");
   for (let i = 0; i <= arr.length; i++) {
@@ -281,6 +285,7 @@ function createTableDijkstra(arr, src) {
   const newTh = document.createElement("th");
   newTh.innerHTML = " ";
   trTableResult.insertBefore(newTh, trTableResult.firstChild);
+  changeNameOfVertices();
 }
 
 function createAdjacencyMatrix(size, arr = []) {
@@ -292,13 +297,16 @@ function createAdjacencyMatrix(size, arr = []) {
     table.classList.add("empty");
   }
   const vertexs = document.createElement("tr");
+  vertexs.classList.add("hvertices");
   const theaderEmpty = document.createElement("th");
   //row
   for (let i = 0; i <= size - 1; i++) {
     let th = document.createElement("th");
     th.innerHTML = letters[i];
+    th.classList.add("vvertices");
     let tv = document.createElement("th");
     tv.innerHTML = letters[i];
+
     let tr = document.createElement("tr");
     tr.appendChild(th);
     vertexs.appendChild(tv);
@@ -324,6 +332,8 @@ function createAdjacencyMatrix(size, arr = []) {
   }
   const pTitle = document.createElement("p");
   pTitle.innerHTML = "ADJACENCY MATRIX";
+  const bLettNumb = createButtonLettToNumb();
+  pTitle.appendChild(bLettNumb);
 
   const dataEntry = document.querySelector(".dataEntry");
   if (table.className === "empty") {
@@ -333,6 +343,7 @@ function createAdjacencyMatrix(size, arr = []) {
     const solution = document.querySelector(".solution");
     solution.appendChild(table);
   }
+  changeNameOfVertices();
 }
 
 //sort adjacencyListVertexs
@@ -369,7 +380,6 @@ function createAdjacencyList(size) {
     //column
     for (let j = 0; j <= size - 1; j++) {
       let td = document.createElement("th");
-
       if (j !== 0) {
         td = document.createElement("td");
         let badjList = document.createElement("button");
@@ -601,6 +611,93 @@ function createStructure() {
     } else {
       newSection.classList.add(section);
       document.body.appendChild(newSection);
+    }
+  }
+}
+
+function createButtonLettToNumb() {
+  const bLettersToNumbers = document.createElement("button");
+  bLettersToNumbers.classList.add("boption");
+  bLettersToNumbers.innerText = "1 2 3";
+  bLettersToNumbers.id = "letters";
+  bLettersToNumbers.addEventListener("click", function () {
+    if (this.innerText === "A B C") {
+      this.innerText = "1 2 3";
+      this.id = "letters";
+    } else {
+      this.innerText = "A B C";
+      this.id = "numbers";
+    }
+    changeNameOfVertices();
+  });
+  return bLettersToNumbers;
+}
+
+function changeNameOfVertices() {
+  const boption = document.querySelector(".boption");
+  const nVertices = parseInt(document.querySelector("#nVertices").value);
+  let tempArr = letters.slice(0, nVertices);
+  const hVertices = document.querySelectorAll(".hvertices");
+  const table = document.querySelectorAll("table");
+  let solutionDijkstra = document.querySelector(".resultDijkstra");
+
+  if (boption.id === "letters") {
+    for (let i = 0; i < hVertices.length; i++) {
+      let ths = hVertices[i].querySelectorAll("th");
+
+      for (let j = 0; j < ths.length; j++) {
+        if (j !== 0) {
+          ths[j].innerText = tempArr[j - 1];
+        }
+      }
+    }
+    //vertical letters
+    table.forEach((t) => {
+      let verticalThInsideTable = t.querySelectorAll(".vvertices");
+      for (let i = 0; i < verticalThInsideTable.length; i++) {
+        verticalThInsideTable[i].innerHTML = tempArr[i];
+      }
+    });
+    //dijkstra
+    if (solutionDijkstra) {
+      let inputs = solutionDijkstra.querySelectorAll("input");
+      let value = inputs[0].value.split(",")[1];
+      if (!letters.includes(value)) {
+        inputs.forEach((e) => {
+          let newValue = e.value.split(",");
+          newValue[1] = letters[newValue[1]];
+          e.value = newValue.join(",");
+        });
+      }
+    }
+  } else {
+    //numbers
+    for (let n in tempArr) {
+      tempArr[n] = n;
+    }
+    for (let i = 0; i < hVertices.length; i++) {
+      let ths = hVertices[i].querySelectorAll("th");
+      for (let j = 0; j < ths.length; j++) {
+        if (j !== 0) {
+          ths[j].innerText = tempArr[j - 1];
+        }
+      }
+    }
+    //vertical numbers
+    table.forEach((t) => {
+      let verticalThInsideTable = t.querySelectorAll(".vvertices");
+      for (let i = 0; i < verticalThInsideTable.length; i++) {
+        verticalThInsideTable[i].innerHTML = tempArr[i];
+      }
+    });
+    //dijkstra
+    if (solutionDijkstra) {
+      let inputs = solutionDijkstra.querySelectorAll("input");
+      inputs.forEach((e) => {
+        let newValue = e.value.split(",");
+        newValue[1] = letters.indexOf(newValue[1]);
+        e.value = newValue.join(",");
+      });
     }
   }
 }
