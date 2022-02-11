@@ -147,6 +147,7 @@ function createTableInputHavelHakimi(size) {
   }
   const pTitle = document.createElement("p");
   pTitle.innerHTML = "DEGREE SEQUENCE";
+  pTitle.classList.add("degree");
   const bLettNumb = createButtonLettToNumb();
   pTitle.appendChild(bLettNumb);
 
@@ -332,6 +333,7 @@ function createAdjacencyMatrix(size, arr = []) {
   }
   const pTitle = document.createElement("p");
   pTitle.innerHTML = "ADJACENCY MATRIX";
+  pTitle.classList.add("matrix");
   const bLettNumb = createButtonLettToNumb();
   pTitle.appendChild(bLettNumb);
 
@@ -380,6 +382,7 @@ function createAdjacencyList(size) {
     //column
     for (let j = 0; j <= size - 1; j++) {
       let td = document.createElement("th");
+      td.classList.add("vvertices");
       if (j !== 0) {
         td = document.createElement("td");
         let badjList = document.createElement("button");
@@ -422,6 +425,9 @@ function createAdjacencyList(size) {
   }
   const pTitle = document.createElement("p");
   pTitle.innerHTML = "ADJACENCY LIST";
+  pTitle.classList.add("list");
+  const bLettNumb = createButtonLettToNumb();
+  pTitle.appendChild(bLettNumb);
 
   const dataEntry = document.querySelector(".dataEntry");
   dataEntry.appendChild(pTitle);
@@ -449,6 +455,7 @@ function readDataTableAdjList(size) {
   const trs = document.querySelectorAll("table tr");
   const adjList = new Map();
   for (let i = 0; i < size; i++) {
+    //ojo pasamos letras pero no deberian ser numeros? si...
     adjList.set(letters[i], []);
   }
   for (let i = 0; i < trs.length; i++) {
@@ -639,7 +646,8 @@ function changeNameOfVertices() {
   let tempArr = letters.slice(0, nVertices);
   const hVertices = document.querySelectorAll(".hvertices");
   const table = document.querySelectorAll("table");
-  let solutionDijkstra = document.querySelector(".resultDijkstra");
+  const solutionDijkstra = document.querySelector(".resultDijkstra");
+  const pTitle = document.querySelector(".empty").previousSibling;
 
   if (boption.id === "letters") {
     for (let i = 0; i < hVertices.length; i++) {
@@ -670,6 +678,15 @@ function changeNameOfVertices() {
         });
       }
     }
+    //adjList
+    if (pTitle.classList.contains("list")) {
+      const badjList = document.querySelectorAll(".badjList");
+      badjList.forEach((e) => {
+        let newValue = parseInt(e.innerText);
+        newValue = letters[newValue];
+        e.innerText = newValue;
+      });
+    }
   } else {
     //numbers
     for (let n in tempArr) {
@@ -697,6 +714,15 @@ function changeNameOfVertices() {
         let newValue = e.value.split(",");
         newValue[1] = letters.indexOf(newValue[1]);
         e.value = newValue.join(",");
+      });
+    }
+    //adjList
+    if (pTitle.classList.contains("list")) {
+      const badjList = document.querySelectorAll(".badjList");
+      badjList.forEach((e) => {
+        let newValue = e.innerText;
+        newValue = letters.indexOf(newValue);
+        e.innerText = newValue;
       });
     }
   }
