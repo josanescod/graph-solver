@@ -111,8 +111,9 @@ function main() {
     const bAlgorithm = makeButtonAlgorithm(bDfs.id, function () {
       secondaryButtonsAnimation(this, "clicked");
       deleteResultTable();
-      let size = parseInt(nVertices.value);
-      const AdjacencyListMap = readDataTableAdjList(size);
+      const size = parseInt(nVertices.value);
+      const boption = document.querySelector(".boption").id;
+      const AdjacencyListMap = readDataTableAdjList(size, boption);
       // Using the above implemented graph class
       const g = new Graph(size);
       g.addadjList(AdjacencyListMap);

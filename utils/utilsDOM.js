@@ -451,19 +451,24 @@ function readDataTableMatrix(size) {
   return newArr;
 }
 
-function readDataTableAdjList(size) {
+function readDataTableAdjList(size, boption) {
+  console.log("reading table with", boption);
   const trs = document.querySelectorAll("table tr");
   const adjList = new Map();
   for (let i = 0; i < size; i++) {
-    //ojo pasamos letras pero no deberian ser numeros? si...
-    adjList.set(letters[i], []);
+    boption === "letters"
+      ? adjList.set(letters[i], [])
+      : adjList.set(i.toString(), []);
   }
   for (let i = 0; i < trs.length; i++) {
     let buttonsRow = trs[i].querySelectorAll("td button");
     for (let j = 0; j < buttonsRow.length; j++) {
-      //
       if (buttonsRow[j].classList.contains("picked")) {
-        adjList.get(letters[i]).push(buttonsRow[j].innerHTML);
+        if (boption === "letters") {
+          adjList.get(letters[i]).push(buttonsRow[j].innerHTML);
+        } else {
+          adjList.get(i.toString()).push(buttonsRow[j].innerHTML);
+        }
       }
     }
   }
