@@ -1,32 +1,47 @@
 ("use strict");
-//import { Graph as Graph } from "../utils/graph.js";
 
-//calcular de alguna manera en que vertice está situado?
+import { Stack as Stack } from "../utils/stack.js";
 
-// Main DFS method
-function dfs(startingNode, g) {
-  let visited = {};
-  const result = [];
-  dfsUtil(startingNode, visited, result, g);
-  return result;
-}
+let stack = new Stack();
+let result = [];
+let pilaArr = [];
+let temp = [];
 
-// Recursive function which process and explore
-// all the adjacent vertex of the vertex with which it is called
-function dfsUtil(vert, visited, result, g) {
-  visited[vert] = true;
-  console.log(`Estamos en el vertice ${vert}`);
-  result.push(vert);
-  console.log(result);
-  var get_neighbours = g.adjList.get(vert);
-  console.log(`vecinos de ${vert}: ${get_neighbours}`);
-  for (var i in get_neighbours) {
-    var get_elem = get_neighbours[i];
-    if (!visited[get_elem]) {
-      dfsUtil(get_elem, visited, result, g);
-    } else {
-      console.log(`Este vertice ${get_neighbours[i]} ya ha sido visitado`);
+function dfs(g, node, visited = {}) {
+  var neighbours = g.adjList.get(node);
+  console.log(`Visiting node ${node}`);
+  visited[node] = true;
+  stack.push(node);
+  result.push(node);
+  console.log(`Estado de la pila: ${stack.elements}, ${typeof stack.elements}`);
+  for (let e of stack.elements) {
+    console.log(e);
+    temp.push(e);
+  }
+
+  console.log(`temp: ${temp}`);
+  pilaArr.push(temp);
+  console.log(`pilaArr ${pilaArr}`);
+  temp = [];
+
+  for (let neighbour of neighbours) {
+    if (!visited[neighbour]) {
+      dfs(g, neighbour, visited);
     }
   }
+  console.log(`<- Backtracking from ${node}`);
+  stack.pop(node);
+  console.log(`Estado de la pila: ${stack.elements}, ${typeof stack.elements}`);
+  for (let e of stack.elements) {
+    console.log(e);
+    temp.push(e);
+  }
+
+  console.log(`temp: ${temp}`);
+  pilaArr.push(temp);
+  console.log(`pilaArr ${pilaArr}`);
+  temp = [];
+  return { result, pilaArr };
 }
+
 export { dfs };
