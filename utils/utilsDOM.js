@@ -452,7 +452,7 @@ function readDataTableMatrix(size) {
 }
 
 function readDataTableAdjList(size, boption) {
-  console.log("reading table with", boption);
+  console.log("Reading table with", boption);
   const trs = document.querySelectorAll("table tr");
   const adjList = new Map();
   for (let i = 0; i < size; i++) {

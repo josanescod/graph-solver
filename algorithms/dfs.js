@@ -4,7 +4,10 @@ import { Stack as Stack } from "../utils/stack.js";
 
 let stack = new Stack();
 let result = [];
-let pilaArr = [];
+let stackArr = [];
+let resultArr = [];
+let addVertices = [];
+let removedVertices = [];
 let temp = [];
 
 function dfs(g, node, visited = {}) {
@@ -13,17 +16,23 @@ function dfs(g, node, visited = {}) {
   visited[node] = true;
   stack.push(node);
   result.push(node);
-  console.log(`Estado de la pila: ${stack.elements}, ${typeof stack.elements}`);
+  addVertices.push(node);
+  removedVertices.push("-");
+  console.log(`Stack: ${stack.elements}`);
   for (let e of stack.elements) {
-    console.log(e);
     temp.push(e);
   }
-
-  console.log(`temp: ${temp}`);
-  pilaArr.push(temp);
-  console.log(`pilaArr ${pilaArr}`);
+  stackArr.push(temp);
+  if (resultArr[resultArr.length - 1] === undefined) {
+    resultArr.push([node]);
+  } else {
+    let newArr = [];
+    for (let e of result) {
+      newArr.push(e);
+    }
+    resultArr.push(newArr);
+  }
   temp = [];
-
   for (let neighbour of neighbours) {
     if (!visited[neighbour]) {
       dfs(g, neighbour, visited);
@@ -31,17 +40,16 @@ function dfs(g, node, visited = {}) {
   }
   console.log(`<- Backtracking from ${node}`);
   stack.pop(node);
-  console.log(`Estado de la pila: ${stack.elements}, ${typeof stack.elements}`);
+  removedVertices.push(node);
+  addVertices.push("-");
+  resultArr.push(resultArr[resultArr.length - 1]);
+  console.log(`Stack: ${stack.elements}`);
   for (let e of stack.elements) {
-    console.log(e);
     temp.push(e);
   }
-
-  console.log(`temp: ${temp}`);
-  pilaArr.push(temp);
-  console.log(`pilaArr ${pilaArr}`);
+  stackArr.push(temp);
   temp = [];
-  return { result, pilaArr };
+  return { stackArr, addVertices, removedVertices, resultArr, result };
 }
 
 export { dfs };

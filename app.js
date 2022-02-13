@@ -126,7 +126,9 @@ function main() {
       }
       if (vertices.indexOf(origin) !== -1) {
         deleteError();
+        console.time("dfs");
         console.log(dfs(g, origin));
+        console.timeEnd("dfs");
       } else {
         printError(
           `Please enter a valid source vertex [${vertices[0]}-${
