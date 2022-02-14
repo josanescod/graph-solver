@@ -545,6 +545,12 @@ function deleteResultTable() {
   while (solution.firstChild) {
     solution.removeChild(solution.lastChild);
   }
+  //delete origin field ?
+  /*const origin = document.querySelector("#origin");
+  if (origin) {
+    console.log(`borrar el campo origin? ${origin.value}`);
+    origin.value = "";
+  }*/
 }
 
 function deleteEmptyTable() {

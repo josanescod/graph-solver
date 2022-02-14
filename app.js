@@ -78,6 +78,7 @@ function main() {
         secondaryButtonsAnimation(this, "clicked");
         deleteResultTable();
         let size = parseInt(nVertices.value);
+        let origin = document.querySelector("#origin").value.toUpperCase();
         const adjacencyMatrixArray = readDataTableMatrix(size);
         //select th vertices, add on array, delete first element,send index of array like origin
         const trvertices = document
@@ -87,7 +88,7 @@ function main() {
         for (let i = 1; i < trvertices.length; i++) {
           vertices.push(trvertices[i].innerText);
         }
-        let origin = document.querySelector("#origin").value.toUpperCase();
+
         if (vertices.indexOf(origin) !== -1) {
           deleteError();
           dijkstra(adjacencyMatrixArray, vertices.indexOf(origin));
