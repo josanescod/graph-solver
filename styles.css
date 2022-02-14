@@ -79,6 +79,10 @@ table.resultDfs {
   padding: 10px;
 }
 
+.resultDfs td {
+  text-align: center;
+}
+
 .error {
   font-size: 14px;
   color: #f03a5f;

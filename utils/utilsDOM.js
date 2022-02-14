@@ -204,7 +204,7 @@ function createTableResultDfs(arr) {
   const table = document.createElement("table");
   table.classList.add("resultDfs");
   const theader = document.createElement("tr");
-  const titles = ["Stack", "Vertex added", "Vertex remove", "Result"];
+  const titles = ["Stack", "Added vertex", "Deleted vertex", "Result"];
   for (let e of titles) {
     let th = document.createElement("th");
     th.innerText = e;
@@ -679,6 +679,7 @@ function changeNameOfVertices() {
   const hVertices = document.querySelectorAll(".hvertices");
   const table = document.querySelectorAll("table");
   const solutionDijkstra = document.querySelector(".resultDijkstra");
+  const solutionDfs = document.querySelector(".resultDfs");
   const pTitle = document.querySelector(".empty").previousSibling;
 
   if (boption.id === "letters") {
@@ -710,6 +711,23 @@ function changeNameOfVertices() {
         });
       }
     }
+    //dfs
+    if (solutionDfs) {
+      let tds = solutionDfs.querySelectorAll("td");
+      tds.forEach((e) => {
+        if (e.innerText !== "" && e.innerText !== "-") {
+          //console.log(e.innerText.length);
+          if (e.innerText.length > 1) {
+            let newValue = e.innerText.split(",");
+            for (let i = 0; i < newValue.length; i++) {
+              newValue[i] = letters[newValue[i]];
+            }
+            e.innerText = newValue.join(",");
+          } else e.innerText = letters[parseInt(e.innerText)];
+        }
+      });
+    }
+
     //adjList
     if (pTitle.classList.contains("list")) {
       const badjList = document.querySelectorAll(".badjList");
@@ -746,6 +764,22 @@ function changeNameOfVertices() {
         let newValue = e.value.split(",");
         newValue[1] = letters.indexOf(newValue[1]);
         e.value = newValue.join(",");
+      });
+    }
+    //dfs
+    if (solutionDfs) {
+      let tds = solutionDfs.querySelectorAll("td");
+      tds.forEach((e) => {
+        if (e.innerText !== "" && e.innerText !== "-") {
+          //console.log(e.innerText.length);
+          if (e.innerText.length > 1) {
+            let newValue = e.innerText.split(",");
+            for (let i = 0; i < newValue.length; i++) {
+              newValue[i] = letters.indexOf(newValue[i]);
+            }
+            e.innerText = newValue.join(",");
+          } else e.innerText = letters.indexOf(e.innerText);
+        }
       });
     }
     //adjList
