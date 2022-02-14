@@ -420,7 +420,7 @@ function createAdjacencyList(size) {
             ? this.classList.remove("picked")
             : this.classList.add("picked");
           let parent = this.parentElement.parentElement.firstChild.innerHTML;
-          let rows = document.querySelectorAll("tr ");
+          let rows = document.querySelectorAll(".empty tr");
           for (let i = 0; i < rows.length; i++) {
             let rowTh = rows[i].querySelector("th");
             if (rowTh.innerHTML === this.innerHTML) {
