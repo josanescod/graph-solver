@@ -60,8 +60,23 @@ input:disabled {
 
 .empty,
 .result,
-.resultDijkstra {
+.resultDijkstra,
+.resultDfs {
   margin: 0 auto;
+}
+
+/*.resultDfs {
+  margin: 0 auto;
+}*/
+
+table.resultDfs {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.resultDfs * {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 10px;
 }
 
 .error {

@@ -19,6 +19,7 @@ import {
   secondaryButtonsAnimation as secondaryButtonsAnimation,
   createStructure as createStructure,
   printMessageSolution as printMessageSolution,
+  createTableResultDfs as createTableResultDfs,
 } from "../utils/utilsDOM.js";
 
 window.onload = () => {
@@ -127,7 +128,7 @@ function main() {
       if (vertices.indexOf(origin) !== -1) {
         deleteError();
         console.time("dfs");
-        console.log(dfs(g, origin));
+        createTableResultDfs(dfs(g, origin));
         console.timeEnd("dfs");
       } else {
         printError(
@@ -137,7 +138,6 @@ function main() {
         );
       }
     });
-
     numVertices(bAlgorithm);
   });
 

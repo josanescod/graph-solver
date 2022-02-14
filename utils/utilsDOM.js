@@ -199,6 +199,33 @@ function createTableResultHavelHakimi(vertices, arr) {
   }
 }
 
+function createTableResultDfs(arr) {
+  console.log(arr);
+  const table = document.createElement("table");
+  table.classList.add("resultDfs");
+  const theader = document.createElement("tr");
+  const titles = ["Stack", "Vertex added", "Vertex remove", "Result"];
+  for (let e of titles) {
+    let th = document.createElement("th");
+    th.innerText = e;
+    theader.appendChild(th);
+  }
+  table.appendChild(theader);
+  let z = 0;
+  while (z < arr[0].length) {
+    let newTr = document.createElement("tr");
+    for (let i = 0; i < arr.length; i++) {
+      let newTd = document.createElement("td");
+      newTd.innerText = arr[i][z];
+      newTr.appendChild(newTd);
+    }
+    z++;
+    table.appendChild(newTr);
+  }
+  const solution = document.querySelector(".solution");
+  solution.appendChild(table);
+}
+
 function createTableDijkstra(arr, src) {
   // to loop vertically through a 2d array
   let j = 0;
@@ -745,6 +772,7 @@ export {
   numVertices,
   createTableDijkstra,
   createAdjacencyMatrix,
+  createTableResultDfs,
   readDataTableMatrix,
   readDataTableAdjList,
   readHavelHakimiTable,

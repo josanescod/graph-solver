@@ -1,7 +1,6 @@
 ("use strict");
 
 import { Stack as Stack } from "../utils/stack.js";
-
 let stack = new Stack();
 let result = [];
 let stackArr = [];
@@ -49,7 +48,17 @@ function dfs(g, node, visited = {}) {
   }
   stackArr.push(temp);
   temp = [];
-  return { stackArr, addVertices, removedVertices, resultArr, result };
+
+  //when stack has 0 elements finish function, save values and reset variables
+  if (stack.elements.length === 0) {
+    let definitiveArray = [stackArr, addVertices, removedVertices, resultArr];
+    stackArr = [];
+    addVertices = [];
+    removedVertices = [];
+    resultArr = [];
+    result = [];
+    return definitiveArray;
+  }
 }
 
 export { dfs };
