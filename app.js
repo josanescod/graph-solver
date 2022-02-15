@@ -142,6 +142,44 @@ function main() {
     numVertices(bAlgorithm);
   });
 
+  //bfs
+  const bBfs = document.querySelector("#bfs");
+  bBfs.addEventListener("click", function () {
+    deleteTemporalTable();
+    console.log("bfs");
+    principalButtonsAnimation(this);
+    const bAlgorithm = makeButtonAlgorithm(bBfs.id, function () {
+      secondaryButtonsAnimation(this, "clicked");
+      deleteResultTable();
+      const size = parseInt(nVertices.value);
+      const boption = document.querySelector(".boption").id;
+      const AdjacencyListMap = readDataTableAdjList(size, boption);
+      // Using the above implemented graph class
+      const g = new Graph(size);
+      g.addadjList(AdjacencyListMap);
+      g.printGraph();
+      let origin = document.querySelector("#origin").value.toUpperCase();
+      const trvertices = document.querySelectorAll("table th ");
+      const vertices = [];
+      for (let i = 0; i < trvertices.length; i++) {
+        vertices.push(trvertices[i].innerText);
+      }
+      if (vertices.indexOf(origin) !== -1) {
+        deleteError();
+        console.time("bfs");
+        //createTableResultDfs(dfs(g, origin));
+        console.timeEnd("bfs");
+      } else {
+        printError(
+          `Please enter a valid source vertex [${vertices[0]}-${
+            vertices[vertices.length - 1]
+          }]`
+        );
+      }
+    });
+    numVertices(bAlgorithm);
+  });
+
   const clearContent = document.querySelector("#clearContent");
   clearContent.addEventListener("click", function () {
     secondaryButtonsAnimation(this, "cleared");

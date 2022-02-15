@@ -30,7 +30,7 @@ const letters = [
 ];
 
 function makeButtonAlgorithm(id, functionAlgo) {
-  if (id === "dijkstra" || id === "dfs") {
+  if (id === "dijkstra" || id === "dfs" || id === "bfs") {
     const inputOrigin = document.createElement("input");
     inputOrigin.id = "origin";
     const pOrigin = document.createElement("p");
@@ -93,7 +93,7 @@ function numVertices(bAlgorithm) {
           const dataEntry = document.querySelector(".dataEntry");
           dataEntry.append(pFootnote, bAlgorithm);
           //tables with adjacency list
-        } else if (algorithm === "dfs") {
+        } else if (algorithm === "dfs" || algorithm === "bfs") {
           createAdjacencyList(nVertices);
           const pFootnote = document.createElement("p");
           pFootnote.classList.add("pFootnote");
@@ -618,6 +618,7 @@ function createStructure() {
     "floyd",
     "dijkstra",
     "dfs",
+    "bfs",
     "clearContent",
   ];
   const sections = ["dataEntry", "solution", "footer"]; //nav
@@ -630,7 +631,7 @@ function createStructure() {
     }
     newButton.innerText = id;
 
-    if (newButton.id === "dfs") {
+    if (newButton.id === "dfs" || newButton.id === "bfs") {
       newButton.classList.add("uppercase");
     } else {
       newButton.classList.add("capitalize");
