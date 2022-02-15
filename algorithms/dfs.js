@@ -1,6 +1,6 @@
 ("use strict");
 
-import { Stack as Stack } from "../utils/stack.js";
+import { Stack } from "../utils/stack.js";
 let stack = new Stack();
 let result = [];
 let stackArr = [];

@@ -1,5 +1,5 @@
 "use strict";
-import { createTableResultHavelHakimi as createTableResultHavelHakimi } from "../utils/utilsDOM.js";
+import { createTableResultHavelHakimi } from "../utils/utilsDOM.js";
 
 let arrayFinal = [];
 let n = 0;

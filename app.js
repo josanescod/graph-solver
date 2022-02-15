@@ -1,25 +1,25 @@
 "use strict";
 
-import { floyd as floyd } from "./algorithms/floyd.js";
-import { dijkstra as dijkstra } from "./algorithms/dijkstra.js";
-import { havelHakimi as havelHakimi } from "./algorithms/havelHakimi.js";
-import { dfs as dfs } from "./algorithms/dfs.js";
-import { Graph as Graph } from "./utils/graph.js";
+import { floyd } from "./algorithms/floyd.js";
+import { dijkstra } from "./algorithms/dijkstra.js";
+import { havelHakimi } from "./algorithms/havelHakimi.js";
+import { dfs } from "./algorithms/dfs.js";
+import { Graph } from "./utils/graph.js";
 import {
-  numVertices as numVertices,
-  readDataTableMatrix as readDataTableMatrix,
-  readDataTableAdjList as readDataTableAdjList,
-  readHavelHakimiTable as readHavelHakimiTable,
-  deleteTemporalTable as deleteTemporalTable,
-  deleteResultTable as deleteResultTable,
-  printError as printError,
-  makeButtonAlgorithm as makeButtonAlgorithm,
-  deleteError as deleteError,
-  principalButtonsAnimation as principalButtonsAnimation,
-  secondaryButtonsAnimation as secondaryButtonsAnimation,
-  createStructure as createStructure,
-  printMessageSolution as printMessageSolution,
-  createTableResultDfs as createTableResultDfs,
+  numVertices,
+  readDataTableMatrix,
+  readDataTableAdjList,
+  readHavelHakimiTable,
+  deleteTemporalTable,
+  deleteResultTable,
+  printError,
+  makeButtonAlgorithm,
+  deleteError,
+  principalButtonsAnimation,
+  secondaryButtonsAnimation,
+  createStructure,
+  printMessageSolution,
+  createTableResultDfs,
 } from "../utils/utilsDOM.js";
 
 window.onload = () => {

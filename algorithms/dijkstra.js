@@ -1,6 +1,6 @@
 "use strict";
 
-import { createTableDijkstra as createTableDijkstra } from "../utils/utilsDOM.js";
+import { createTableDijkstra } from "../utils/utilsDOM.js";
 
 function minDistance(dist, sptSet, numbVertices) {
   let min = Infinity;
