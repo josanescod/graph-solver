@@ -4,6 +4,7 @@ import { floyd } from "./algorithms/floyd.js";
 import { dijkstra } from "./algorithms/dijkstra.js";
 import { havelHakimi } from "./algorithms/havelHakimi.js";
 import { dfs } from "./algorithms/dfs.js";
+import { bfs } from "./algorithms/bfs.js";
 import { Graph } from "./utils/graph.js";
 import {
   numVertices,
@@ -156,6 +157,11 @@ function main() {
       const AdjacencyListMap = readDataTableAdjList(size, boption);
       // Using the above implemented graph class
       const g = new Graph(size);
+      //test pass adjList to adjMatrix:
+      let values = Array.from(AdjacencyListMap.values());
+      console.log("VALUES", values);
+      const test = g.convertToAdjMatrix(values);
+      console.log("TEST: ", test);
       g.addadjList(AdjacencyListMap);
       g.printGraph();
       let origin = document.querySelector("#origin").value.toUpperCase();
@@ -166,7 +172,9 @@ function main() {
       }
       if (vertices.indexOf(origin) !== -1) {
         deleteError();
+
         console.time("bfs");
+        bfs(test, origin);
         //createTableResultDfs(dfs(g, origin));
         console.timeEnd("bfs");
       } else {
