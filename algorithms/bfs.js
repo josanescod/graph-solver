@@ -1,5 +1,6 @@
 "use strict";
 
+//graph, object? map? array2d?
 function bfs(graph, start, visited = []) {
   let result = [];
   //A Queue to manage the nodes that have yet to be visited
