@@ -174,7 +174,7 @@ function main() {
         deleteError();
 
         console.time("bfs");
-        bfs(test, origin);
+        bfs(test, origin); // graph, adjacency or matrix?
         //createTableResultDfs(dfs(g, origin));
         console.timeEnd("bfs");
       } else {
