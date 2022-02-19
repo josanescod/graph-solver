@@ -169,7 +169,7 @@ function main() {
         deleteError();
         const graph = g.convertToAdjListArray();
         console.time("bfs");
-        bfs(graph, origin);
+        console.log(bfs(graph, origin));
         console.timeEnd("bfs");
       } else {
         printError(

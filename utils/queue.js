@@ -23,8 +23,9 @@ class Queue {
     return this.elements.length;
   }
 
-  printQueue() {
-    console.log(this.elements);
+  returnQueue() {
+    //console.log(this.elements);
+    return this.elements;
   }
 }
 

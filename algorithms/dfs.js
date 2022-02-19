@@ -5,7 +5,7 @@ let stack = new Stack();
 let result = [];
 let stackArr = [];
 let resultArr = [];
-let addVertices = [];
+let addedVertices = [];
 let removedVertices = [];
 let temp = [];
 
@@ -15,7 +15,7 @@ function dfs(g, node, visited = {}) {
   visited[node] = true;
   stack.push(node);
   result.push(node);
-  addVertices.push(node);
+  addedVertices.push(node);
   removedVertices.push("-");
   console.log(`Stack: ${stack.elements}`);
   for (let e of stack.elements) {
@@ -40,7 +40,7 @@ function dfs(g, node, visited = {}) {
   console.log(`<- Backtracking from ${node}`);
   stack.pop(node);
   removedVertices.push(node);
-  addVertices.push("-");
+  addedVertices.push("-");
   resultArr.push(resultArr[resultArr.length - 1]);
   console.log(`Stack: ${stack.elements}`);
   for (let e of stack.elements) {
@@ -51,9 +51,9 @@ function dfs(g, node, visited = {}) {
 
   //when stack has 0 elements finish function, save values and reset variables
   if (stack.elements.length === 0) {
-    let definitiveArray = [stackArr, addVertices, removedVertices, resultArr];
+    let definitiveArray = [stackArr, addedVertices, removedVertices, resultArr];
     stackArr = [];
-    addVertices = [];
+    addedVertices = [];
     removedVertices = [];
     resultArr = [];
     result = [];
