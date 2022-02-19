@@ -1,7 +1,31 @@
 "use strict";
+import { letters } from "../utils/utilsDOM.js";
 
-//graph, object? map? array2d?
+function convertToAdjMatrix(arr) {
+  let adjM = [];
+  for (let i = 0; i < arr.length; i++) {
+    let temp = [];
+    for (let j = 0; j < arr.length; j++) {
+      temp.push(0);
+    }
+    adjM.push(temp);
+  }
+  //insert values adjList to adjMatrix
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+      adjM[i][arr[i][j]] = 1;
+    }
+  }
+  return adjM;
+}
+
 function bfs(graph, start, visited = []) {
+  graph = convertToAdjMatrix(graph);
+
+  if (/[a-zA-Z]/.test(start)) {
+    start = letters.indexOf(start);
+  }
+  //console.log("GRAPH inside BFS: ", graph, "ORIGIN: ", start);
   let result = [];
   //A Queue to manage the nodes that have yet to be visited
   var queue = [];

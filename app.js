@@ -157,11 +157,6 @@ function main() {
       const AdjacencyListMap = readDataTableAdjList(size, boption);
       // Using the above implemented graph class
       const g = new Graph(size);
-      //test pass adjList to adjMatrix:
-      let values = Array.from(AdjacencyListMap.values());
-      console.log("VALUES", values);
-      const test = g.convertToAdjMatrix(values);
-      console.log("TEST: ", test);
       g.addadjList(AdjacencyListMap);
       g.printGraph();
       let origin = document.querySelector("#origin").value.toUpperCase();
@@ -172,10 +167,9 @@ function main() {
       }
       if (vertices.indexOf(origin) !== -1) {
         deleteError();
-
+        const graph = g.convertToAdjListArray();
         console.time("bfs");
-        bfs(test, origin); // graph, adjacency or matrix?
-        //createTableResultDfs(dfs(g, origin));
+        bfs(graph, origin);
         console.timeEnd("bfs");
       } else {
         printError(
