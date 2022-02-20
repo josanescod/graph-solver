@@ -43,7 +43,6 @@ function bfs(graph, start, visited = []) {
   addedVertices.push(parseInt(start));
   //resultArr.push([parseInt(start)]);
   removedVertices.push("-");
-
   //A boolean array indicating whether we have already visited a node
   visited = [];
   //(The start node is already visited)
@@ -65,9 +64,6 @@ function bfs(graph, start, visited = []) {
         queue.add(i);
         addedVertices.push(i);
         removedVertices.push("-");
-
-        console.log("visitando nodos vecinos...");
-
         console.log("Visiting node " + i + " and adding it to the queue");
       }
     }
@@ -76,25 +72,44 @@ function bfs(graph, start, visited = []) {
     removedVertices.push(node);
   }
 
-  //calculate resultArr
-  for (let i = 0; i < addedVertices.length; i++) {
-    temp = addedVertices.slice(0, i);
-    resultArr.push(temp);
-  }
-
-  //resultArr = [];
-  for (let i = 0; i < resultArr.length; i++) {
-    //console.log(resultArr[i]);
-    if (resultArr[i].includes("-")) {
-      resultArr[i] = resultArr[i].filter((val) => val !== "-");
+  if (queue.size() === 0) {
+    //calculate resultArr
+    for (let i = 0; i < addedVertices.length; i++) {
+      temp = addedVertices.slice(0, i);
+      resultArr.push(temp);
     }
+
+    for (let i = 0; i < resultArr.length; i++) {
+      if (resultArr[i].includes("-")) {
+        resultArr[i] = resultArr[i].filter((val) => val !== "-");
+      }
+    }
+    resultArr.shift();
+    resultArr.push(resultArr[resultArr.length - 1]);
+
+    //calculate queueArr
+    let queueTemp = [];
+    for (let i = 0; i < removedVertices.length; i++) {
+      if (removedVertices[i] !== "-") {
+        queueTemp.shift();
+      } else {
+        queueTemp.push(addedVertices[i]);
+      }
+
+      let arrTemp = queueTemp.slice();
+      queueArr.push(arrTemp);
+    }
+    //console.log("queueArr==> ", queueArr);
+
+    let definitiveArray = [queueArr, addedVertices, removedVertices, resultArr];
+    queueArr = [];
+    queueTemp = [];
+    addedVertices = [];
+    removedVertices = [];
+    resultArr = [];
+    result = [];
+    return definitiveArray;
   }
-  resultArr.shift();
-  resultArr.push(resultArr[resultArr.length - 1]);
-
-  //console.log(resultArr);
-
-  return [addedVertices, removedVertices, result, resultArr];
 }
 
 export { bfs };
