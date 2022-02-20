@@ -41,6 +41,7 @@ function bfs(graph, start, visited = []) {
   //Adding the node to start from
   queue.add(parseInt(start));
   addedVertices.push(parseInt(start));
+  //resultArr.push([parseInt(start)]);
   removedVertices.push("-");
 
   //A boolean array indicating whether we have already visited a node
@@ -75,7 +76,25 @@ function bfs(graph, start, visited = []) {
     removedVertices.push(node);
   }
 
-  return [addedVertices, removedVertices, result];
+  //calculate resultArr
+  for (let i = 0; i < addedVertices.length; i++) {
+    temp = addedVertices.slice(0, i);
+    resultArr.push(temp);
+  }
+
+  //resultArr = [];
+  for (let i = 0; i < resultArr.length; i++) {
+    //console.log(resultArr[i]);
+    if (resultArr[i].includes("-")) {
+      resultArr[i] = resultArr[i].filter((val) => val !== "-");
+    }
+  }
+  resultArr.shift();
+  resultArr.push(resultArr[resultArr.length - 1]);
+
+  //console.log(resultArr);
+
+  return [addedVertices, removedVertices, result, resultArr];
 }
 
 export { bfs };
