@@ -21,6 +21,7 @@ import {
   createStructure,
   printMessageSolution,
   createTableResultDfs,
+  createTableResultBfs,
 } from "../utils/utilsDOM.js";
 
 window.onload = () => {
@@ -169,7 +170,7 @@ function main() {
         deleteError();
         const graph = g.convertToAdjListArray();
         console.time("bfs");
-        console.log(bfs(graph, origin));
+        createTableResultBfs(bfs(graph, origin));
         console.timeEnd("bfs");
       } else {
         printError(

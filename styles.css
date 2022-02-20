@@ -61,25 +61,25 @@ input:disabled {
 .empty,
 .result,
 .resultDijkstra,
-.resultDfs {
+.resultDfs,
+.resultBfs {
   margin: 0 auto;
 }
 
-/*.resultDfs {
-  margin: 0 auto;
-}*/
-
-table.resultDfs {
+table.resultDfs,
+table.resultBfs {
   border: 1px solid black;
   border-collapse: collapse;
 }
-.resultDfs * {
+.resultDfs *,
+.resultBfs * {
   border: 1px solid black;
   border-collapse: collapse;
   padding: 10px;
 }
 
-.resultDfs td {
+.resultDfs td,
+.resultBfs td {
   text-align: center;
 }
 

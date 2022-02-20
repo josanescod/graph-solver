@@ -2,8 +2,6 @@
 import { letters } from "../utils/utilsDOM.js";
 import { Queue } from "../utils/queue.js";
 
-//queueArr,addVertices,removedVertices,resultArr
-//let result=[];
 let queue = new Queue();
 let queueArr = [];
 let resultArr = [];
@@ -99,7 +97,6 @@ function bfs(graph, start, visited = []) {
       let arrTemp = queueTemp.slice();
       queueArr.push(arrTemp);
     }
-    //console.log("queueArr==> ", queueArr);
 
     let definitiveArray = [queueArr, addedVertices, removedVertices, resultArr];
     queueArr = [];
