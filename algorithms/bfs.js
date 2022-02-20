@@ -26,8 +26,45 @@ function convertToAdjMatrix(arr) {
   }
   return adjM;
 }
+function changeNumbersByLetters(
+  queueArr,
+  addedVertices,
+  removedVertices,
+  resultArr
+) {
+  //queueArr
+  for (let i = 0; i < queueArr.length; i++) {
+    for (let j = 0; j < queueArr[i].length; j++) {
+      queueArr[i][j] = letters[queueArr[i][j]];
+    }
+  }
 
-function bfs(graph, start, visited = []) {
+  //addedVertices
+  for (let i = 0; i < addedVertices.length; i++) {
+    if (addedVertices[i] !== "-") {
+      addedVertices[i] = letters[addedVertices[i]];
+    }
+  }
+  //removedVertices
+  for (let i = 0; i < removedVertices.length; i++) {
+    if (removedVertices[i] !== "-") {
+      removedVertices[i] = letters[removedVertices[i]];
+    }
+  }
+  //resultArr
+  let newResult = [];
+
+  for (let i = 0; i < resultArr.length; i++) {
+    let temp = [];
+    for (let j = 0; j < resultArr[i].length; j++) {
+      temp.push(letters[resultArr[i][j]]);
+    }
+    newResult.push(temp);
+  }
+  return [queueArr, addedVertices, removedVertices, newResult];
+}
+
+function bfs(graph, start, boption, visited = []) {
   graph = convertToAdjMatrix(graph);
 
   if (/[a-zA-Z]/.test(start)) {
@@ -98,7 +135,18 @@ function bfs(graph, start, visited = []) {
       queueArr.push(arrTemp);
     }
 
-    let definitiveArray = [queueArr, addedVertices, removedVertices, resultArr];
+    let definitiveArray;
+    if (boption === "letters") {
+      definitiveArray = changeNumbersByLetters(
+        queueArr,
+        addedVertices,
+        removedVertices,
+        resultArr
+      );
+    } else {
+      definitiveArray = [queueArr, addedVertices, removedVertices, resultArr];
+    }
+
     queueArr = [];
     queueTemp = [];
     addedVertices = [];

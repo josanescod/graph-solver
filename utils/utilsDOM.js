@@ -707,6 +707,7 @@ function changeNameOfVertices() {
   const table = document.querySelectorAll("table");
   const solutionDijkstra = document.querySelector(".resultDijkstra");
   const solutionDfs = document.querySelector(".resultDfs");
+  const solutionBfs = document.querySelector(".resultBfs");
   const pTitle = document.querySelector(".empty").previousSibling;
 
   if (boption.id === "letters") {
@@ -738,9 +739,14 @@ function changeNameOfVertices() {
         });
       }
     }
-    //dfs
-    if (solutionDfs) {
-      let tds = solutionDfs.querySelectorAll("td");
+    //dfs-bfs
+    if (solutionDfs || solutionBfs) {
+      let tds;
+      if (solutionDfs) {
+        tds = solutionDfs.querySelectorAll("td");
+      } else if (solutionBfs) {
+        tds = solutionBfs.querySelectorAll("td");
+      }
       tds.forEach((e) => {
         if (e.innerText !== "" && e.innerText !== "-") {
           //console.log(e.innerText.length);
@@ -793,9 +799,14 @@ function changeNameOfVertices() {
         e.value = newValue.join(",");
       });
     }
-    //dfs
-    if (solutionDfs) {
-      let tds = solutionDfs.querySelectorAll("td");
+    //dfs-bfs
+    if (solutionDfs || solutionBfs) {
+      let tds;
+      if (solutionDfs) {
+        tds = solutionDfs.querySelectorAll("td");
+      } else if (solutionBfs) {
+        tds = solutionBfs.querySelectorAll("td");
+      }
       tds.forEach((e) => {
         if (e.innerText !== "" && e.innerText !== "-") {
           //console.log(e.innerText.length);

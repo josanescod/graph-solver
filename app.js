@@ -169,8 +169,10 @@ function main() {
       if (vertices.indexOf(origin) !== -1) {
         deleteError();
         const graph = g.convertToAdjListArray();
+        const boption = document.querySelector(".boption").id;
         console.time("bfs");
-        createTableResultBfs(bfs(graph, origin));
+
+        createTableResultBfs(bfs(graph, origin, boption));
         console.timeEnd("bfs");
       } else {
         printError(
