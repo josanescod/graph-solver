@@ -1,0 +1,15 @@
+"filename", "language", "JavaScript", "Markdown", "CSS", "HTML", "comment", "blank", "total"
+"/home/josan/web-projects/graph-solver/README.md", "Markdown", 0, 7, 0, 0, 0, 3, 10
+"/home/josan/web-projects/graph-solver/algorithms/bfs.js", "JavaScript", 126, 0, 0, 0, 16, 19, 161
+"/home/josan/web-projects/graph-solver/algorithms/dfs.js", "JavaScript", 59, 0, 0, 0, 1, 5, 65
+"/home/josan/web-projects/graph-solver/algorithms/dijkstra.js", "JavaScript", 65, 0, 0, 0, 21, 8, 94
+"/home/josan/web-projects/graph-solver/algorithms/floyd.js", "JavaScript", 41, 0, 0, 0, 1, 4, 46
+"/home/josan/web-projects/graph-solver/algorithms/havelHakimi.js", "JavaScript", 113, 0, 0, 0, 6, 19, 138
+"/home/josan/web-projects/graph-solver/app.js", "JavaScript", 177, 0, 0, 0, 5, 14, 196
+"/home/josan/web-projects/graph-solver/index.html", "HTML", 0, 0, 0, 14, 0, 1, 15
+"/home/josan/web-projects/graph-solver/styles.css", "CSS", 0, 0, 138, 0, 1, 24, 163
+"/home/josan/web-projects/graph-solver/utils/graph.js", "JavaScript", 47, 0, 0, 0, 9, 8, 64
+"/home/josan/web-projects/graph-solver/utils/queue.js", "JavaScript", 23, 0, 0, 0, 1, 9, 33
+"/home/josan/web-projects/graph-solver/utils/stack.js", "JavaScript", 23, 0, 0, 0, 0, 8, 31
+"/home/josan/web-projects/graph-solver/utils/utilsDOM.js", "JavaScript", 787, 0, 0, 0, 34, 42, 863
+"Total", "-", 1461, 7, 138, 14, 95, 164, 1879

@@ -1,0 +1,42 @@
+Date : 2022-02-20 18:31:35
+Directory : /home/josan/web-projects/graph-solver
+Total : 13 files,  1620 codes, 95 comments, 164 blanks, all 1879 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |         10 |      1,461 |         94 |        136 |      1,691 |
+| CSS        |          1 |        138 |          1 |         24 |        163 |
+| HTML       |          1 |         14 |          0 |          1 |         15 |
+| Markdown   |          1 |          7 |          0 |          3 |         10 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                            | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                               |         13 |      1,620 |         95 |        164 |      1,879 |
+| algorithms                                                      |          5 |        404 |         45 |         55 |        504 |
+| utils                                                           |          4 |        880 |         44 |         67 |        991 |
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                        | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /home/josan/web-projects/graph-solver/README.md                 | Markdown   |          7 |          0 |          3 |         10 |
+| /home/josan/web-projects/graph-solver/algorithms/bfs.js         | JavaScript |        126 |         16 |         19 |        161 |
+| /home/josan/web-projects/graph-solver/algorithms/dfs.js         | JavaScript |         59 |          1 |          5 |         65 |
+| /home/josan/web-projects/graph-solver/algorithms/dijkstra.js    | JavaScript |         65 |         21 |          8 |         94 |
+| /home/josan/web-projects/graph-solver/algorithms/floyd.js       | JavaScript |         41 |          1 |          4 |         46 |
+| /home/josan/web-projects/graph-solver/algorithms/havelHakimi.js | JavaScript |        113 |          6 |         19 |        138 |
+| /home/josan/web-projects/graph-solver/app.js                    | JavaScript |        177 |          5 |         14 |        196 |
+| /home/josan/web-projects/graph-solver/index.html                | HTML       |         14 |          0 |          1 |         15 |
+| /home/josan/web-projects/graph-solver/styles.css                | CSS        |        138 |          1 |         24 |        163 |
+| /home/josan/web-projects/graph-solver/utils/graph.js            | JavaScript |         47 |          9 |          8 |         64 |
+| /home/josan/web-projects/graph-solver/utils/queue.js            | JavaScript |         23 |          1 |          9 |         33 |
+| /home/josan/web-projects/graph-solver/utils/stack.js            | JavaScript |         23 |          0 |          8 |         31 |
+| /home/josan/web-projects/graph-solver/utils/utilsDOM.js         | JavaScript |        787 |         34 |         42 |        863 |
+| Total                                                           |            |      1,620 |         95 |        164 |      1,879 |
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+
