@@ -72,17 +72,17 @@ function bfs(graph, start, boption, visited = []) {
   }
 
   let result = [];
+
   //A Queue to manage the nodes that have yet to be visited
   //Adding the node to start from
-  queue.add(parseInt(start));
-  addedVertices.push(parseInt(start));
+  queue.add(start);
+  addedVertices.push(start);
   //resultArr.push([parseInt(start)]);
   removedVertices.push("-");
   //A boolean array indicating whether we have already visited a node
   visited = [];
   //(The start node is already visited)
   visited[start] = true;
-
   //While there are nodes left to visit...
   while (queue.size() > 0) {
     var node = queue.remove();
@@ -152,6 +152,7 @@ function bfs(graph, start, boption, visited = []) {
     addedVertices = [];
     removedVertices = [];
     resultArr = [];
+    console.log(result);
     result = [];
     return definitiveArray;
   }
