@@ -22,7 +22,7 @@ import {
   printMessageSolution,
   createTableResultDfs,
   createTableResultBfs,
-} from "../utils/utilsDOM.js";
+} from "./utils/utilsDOM.js";
 
 window.onload = () => {
   main();
